@@ -53,11 +53,19 @@ export const POST = async (request) => {
     }
   }
 
+//https://docs.stripe.com/payments/checkout/customization
+
   const session = await stripe.checkout.sessions.create({
     line_items: stripeItems,
     mode: "payment",
+    //Asking Address in Stripe Checkout Page
+    billing_address_collection: 'required',
+    // phone_number_collection: {
+    //   enabled: true,
+    // },
     success_url: `${process.env.NEXT_PUBLIC_BASE_API_URL}/success`,
     cancel_url: `${process.env.NEXT_PUBLIC_BASE_API_URL}/cancel`,
+
   });
 
   return NextResponse.json({ url: session.url });
