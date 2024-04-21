@@ -61,9 +61,9 @@ const products = [
         description:"Elevate your sneaker game to new heights with the latest evolution of the iconic Air VaporMax series. The 2023 Flyknit combines cutting-edge technology, exceptional comfort, and bold style. Its innovative Flyknit upper offers a second-skin fit, ensuring a snug yet breathable feel with every step. The renowned VaporMax sole unit delivers unparalleled cushioning and responsiveness, providing a smooth ride that's perfect for both athletic performance and street-style fashion.",
         category:"Men",
         slug:"nike_air_vapormax",
-        imageUrl:"https://i.postimg.cc/YSRdjTHj/Airforce-teen1.png",
+        imageUrl:"https://i.postimg.cc/kGYBQG6F/Airforce-teen1.png",
         images:{
-          image1: 'https://i.postimg.cc/YSRdjTHj/Airforce-teen1.png',
+          image1: 'https://i.postimg.cc/kGYBQG6F/Airforce-teen1.png',
           image2: 'https://images.pexels.com/photos/2239997/pexels-photo-2239997.jpeg',
           image3: 'https://images.pexels.com/photos/2239997/pexels-photo-2239997.jpeg',
         }
