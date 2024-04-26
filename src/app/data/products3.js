@@ -21,10 +21,50 @@ const getAllProductsQuery = `
           title
           handle
           description
-          images(first: 1) {
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+          totalInventory
+          variants(first: 10) {
+            edges {
+              node {
+                id
+                title
+                sku
+                availableForSale
+                price {
+                  amount
+                  currencyCode
+                }
+                compareAtPrice {
+                  amount
+                  currencyCode
+                }
+                quantityAvailable
+              }
+            }
+          }
+          collections(first: 10) {
+            edges {
+              node {
+                id
+                title
+              }
+            }
+          }
+          productType
+          images(first: 5) {
             edges {
               node {
                 src
+                altText
               }
             }
           }
@@ -57,7 +97,7 @@ const ProductList = () => {
 
           const { products } = data;
           allProducts = [...allProducts, ...products.edges.map((edge) => edge.node)];
-          
+
           if (!products.pageInfo.hasNextPage) {
             break;
           }
@@ -66,7 +106,7 @@ const ProductList = () => {
         }
 
         setProducts(allProducts);
-        console.log ('allProducts',allProducts);
+        // console.log('allProducts', allProducts);
       } catch (error) {
         setError(error);
       } finally {
@@ -87,9 +127,26 @@ const ProductList = () => {
         <div key={product.id}>
           <h3>{product.title}</h3>
           <p>{product.description}</p>
-          {product.images.edges.length > 0 && (
-            <img src={product.images.edges[0].node.src} alt={product.title} />
-          )}
+          <p>Price: {product.priceRange.minVariantPrice.amount} {product.priceRange.minVariantPrice.currencyCode}</p>
+          <p>Quantity: {product.totalInventory}</p>
+          <h4>Variants:</h4>
+          {product.variants.edges.map((variant) => (
+            <div key={variant.node.id}>
+              <p>Title: {variant.node.title}</p>
+              <p>SKU: {variant.node.sku}</p>
+              <p>Price: {variant.node.price.amount} {variant.node.price.currencyCode}</p>
+              <p>Quantity: {variant.node.quantityAvailable}</p>
+            </div>
+          ))}
+          <h4>Collections:</h4>
+          {product.collections.edges.map((collection) => (
+            <p key={collection.node.id}>{collection.node.title}</p>
+          ))}
+          <p>Product Type: {product.productType}</p>
+          <h4>Images:</h4>
+          {product.images.edges.map((image) => (
+            <img key={image.node.src} src={image.node.src} alt={image.node.altText} />
+          ))}
         </div>
       ))}
     </div>
@@ -97,7 +154,3 @@ const ProductList = () => {
 };
 
 export default ProductList;
-
-
-
-

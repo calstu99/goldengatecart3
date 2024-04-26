@@ -31,7 +31,8 @@ const links = [
 
 const Nav = () => {
     const pathname = usePathname();
-    const {openCart} = useCart();
+    const {cart, openCart} = useCart();
+    
 
     const [isSticky, setIsSticky] = useState(false);
 
@@ -51,6 +52,12 @@ const Nav = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }, []);
+
+    const totalQuantity = cart.reduce(
+      (total, product) => total + product.quantity,
+      0
+    );
+    console.log('total quantity',totalQuantity);
 
   return (
     
@@ -98,17 +105,34 @@ const Nav = () => {
             {/* https://tailwindcss.com/docs/divide-color*/}
           <div className="flex divide-x border-r sm:border-1 border-solid border-gray-100 ">
 
-            <Button
+            {/* <Button
               variant={"outline"}
               onClick={() => openCart()}
               className="flex flex-col gap-y-1.5 h-12 w-12 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-none"
             >
 
               <ShoppingBag size={25} color="#6d28d9" />
+              <span class='badge badge-warning' id='lblCartCount'> 5 </span>
               <span className="hidden text-xs font-semibold text-gray-500 sm:block">
                 Cart
               </span>
-            </Button>
+            </Button> */}
+            
+            <button
+            variant={"outline"}
+            onClick={() => openCart()}
+              className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
+              aria-label="Cart"
+            >
+              <ShoppingBag size={25} color="#6d28d9" />
+              {totalQuantity > 0 && (
+                <span className="absolute inset-0 object-right-top -mr-6">
+                  <div className="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
+                    {totalQuantity}
+                  </div>
+                </span>
+              )}
+            </button>
 
           </div>
           <div>
