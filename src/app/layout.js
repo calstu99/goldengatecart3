@@ -20,7 +20,6 @@ export default function RootLayout({ children }) {
         <CartProvider>
         <Nav />
         <CartModal/>
-       
         {children}
         <Footer/>
         </CartProvider>

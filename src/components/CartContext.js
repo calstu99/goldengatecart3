@@ -18,6 +18,10 @@ const closeCart = () => {
   setIsCartOpen(false);
   // localStorage.setItem('openCartModal','false');
 } 
+
+const clearCart = () => {
+  setCart([]);
+}
  
 // adding retrieval from localStorage
 useEffect(() => {
@@ -43,6 +47,7 @@ useEffect(() => {
       const updatedCart = [...cart];
       updatedCart[existingProductIndex].quantity += 1;
       setCart(updatedCart);
+      // console.log('cart',cart);
     } else {
       setCart([...cart, { ...product, quantity: 1 }]);
     }
@@ -90,6 +95,7 @@ useEffect(() => {
         isCartOpen,
         openCart,
         closeCart,
+        clearCart,
       }}
     >
       {children}

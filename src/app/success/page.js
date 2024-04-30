@@ -1,12 +1,15 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCart } from "../../components/CartContext";
+
 
 
 const Success = () => {
 
   const router = useRouter();
   const recentOrder = useRef(null);
+  
 
   
   useEffect(() => {
@@ -15,11 +18,15 @@ const Success = () => {
     const stateFromStorage = window.localStorage.getItem('cartItems');
     recentOrder.current = stateFromStorage && JSON.parse(stateFromStorage);
    // write recent Order to database and track fulfillment.
+    // clearShoppingCart();
+    
     clearShoppingCart();
 
    // Redirect to the home page after 5 seconds
    const redirectTimer = setTimeout(() => {
       router.push('/');
+      // to refresh paypal transactions - page need to refresh to clear the cart.
+      //window.location.reload();
     }, 5000);
 
     // Clean up the redirect timer when the component unmounts
@@ -35,6 +42,7 @@ const Success = () => {
 
   function clearShoppingCart() {
        localStorage.removeItem('cartItems');
+       console.log('clearing shopping cart');
    }
 
   return (

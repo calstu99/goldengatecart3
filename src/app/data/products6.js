@@ -113,7 +113,7 @@ const LandingPage = () => {
       }
     };
 
-    const interval = setInterval(fetchAllProducts, 10000); // Update every 30 seconds
+    const interval = setInterval(fetchAllProducts, 30000); // Update every 30 seconds
 
     return () => clearInterval(interval); // Clean up the interval on component unmount
   }, []);
@@ -146,19 +146,13 @@ const LandingPage = () => {
               )}
               <div className="p-4">
                 <h3 className="text-lg font-medium text-gray-900 mb-2">{product.title}</h3>
-                <p className="text-gray-500 mb-4">{product.description}</p>
+                <p className="text-gray-500 mb-4 line-clamp-5">{product.description}</p>
                 <div className="flex justify-between items-center">
                   <p className="text-gray-900 font-medium">
                     {product.priceRange.minVariantPrice.amount}{' '}
                     {product.priceRange.minVariantPrice.currencyCode}
                   </p>
                   <div className="flex space-x-2">
-                    <button
-                    //   onClick={() => addToCart(product)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
-                    >
-                      Add to Cart
-                    </button>
                     <button
                       onClick={() => showVariants(product)}
                       className="bg-gray-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded"
@@ -168,32 +162,40 @@ const LandingPage = () => {
                   </div>
                 </div>
               </div>
+              
               {selectedProduct && selectedProduct.id === product.id && (
                 <div className="bg-white shadow-md rounded-lg p-4 mt-4">
                   <h4 className="text-lg font-medium text-gray-900 mb-2">Variants</h4>
-                  <p>
-                    Name {selectedProduct.handle} 
-                  </p>
-                  <p>
-                    Name {selectedProduct.id} 
-                  </p>
+                  <p>Name: {selectedProduct.handle}</p>
+                  <p>ID: {selectedProduct.id}</p>
                   {selectedProduct.variants.edges.map((variant) => (
                     <div key={variant.node.id} className="flex justify-between items-center mb-2">
-                                           
                       <p>{variant.node.title}</p>
                       <p>
                         {variant.node.price.amount} {variant.node.price.currencyCode}
                       </p>
-                      <span>
-                      <p>
-                        Quantity available = {variant.node.quantityAvailable}
-                      </p>
-                      </span>
-                     
+                      <p>Quantity available: {variant.node.quantityAvailable}</p>
+                      <button
+                        onClick={() =>
+                          addToCart({
+                            id: `${selectedProduct.id}-${variant.node.title}`,
+                            name:
+                              variant.node.title !== 'Default Title'
+                                ? `${selectedProduct.handle}-${variant.node.title}`
+                                : selectedProduct.handle,
+                            quantity: parseInt(variant.node.quantityAvailable),
+                            price: parseFloat(variant.node.price.amount),
+                          })
+                        }
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded"
+                      >
+                        Add to Cart
+                      </button>
                     </div>
                   ))}
                 </div>
               )}
+
             </div>
           ))}
         </div>

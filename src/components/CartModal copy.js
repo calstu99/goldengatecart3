@@ -1,8 +1,7 @@
 "use client";
-import React, { useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from "../components/ui/button";
 import { useCart } from "./CartContext";
-import { useRouter } from 'next/navigation';
 import {
   Sheet,
   SheetContent,
@@ -13,35 +12,19 @@ import {
 
 import PayPalButton  from '../components/PayPalButton';
 
+
 const CartModal = () => {
-  const { cart, incrementQuantity, decrementQuantity, removeFromCart, isCartOpen, closeCart,openCart,clearCart} = useCart();
-  const [paymentStatus, setPaymentStatus] = useState('pending');
-  const paypalRef = useRef();
-  const router = useRouter();
-  const addPaypalScript = () => {
-    return new Promise((resolve, reject) => {
-      if (window.paypal) {
-        resolve(window.paypal);
-        return;
-      }
-      const script = document.createElement("script");
-      script.src = "https://www.paypal.com/sdk/js?client-id=AYPKDUUhhgy0T2caLtaC0i4Pf3YUg9mHZMrHZV7n9P01hyV2R9TNLOHwCi1V25X3zcKcQECH-GhnGHjt";
-      script.type = "text/javascript";
-      script.async = true;
-      script.onload = () => resolve(window.paypal);
-      script.onerror = reject;
-      document.body.appendChild(script);
-    });
-  }; 
-  
-  const handlePaymentSuccess = () => {
-    // Reset the cart state
-    console.log('clear Cart');
-    setPaymentStatus('success');
-    clearCart();
-    closeCart();
-    // router.push(`${process.env.NEXT_PUBLIC_BASE_API_URL}/success`);
-  };
+  const { cart, incrementQuantity, decrementQuantity, removeFromCart, isCartOpen, closeCart,openCart} = useCart();
+  useEffect(() => {
+    if (isCartOpen) {
+      window.scrollTo(0, 0); // Scroll to the top of the page
+    }
+  }, [isCartOpen]);
+
+  //***************************/
+   //console.log('is cart open', isCartOpen);
+  //************************* */
+  console.log('cart',cart);
 
   const totalAmount = cart.reduce(
     (total, product) => total + product.price * product.quantity,
@@ -76,22 +59,6 @@ const CartModal = () => {
       });
   };
 
-   // Load the PayPal script only once
-   useEffect(() => {
-    addPaypalScript().then((paypal) => {
-      paypalRef.current = paypal;
-    }).catch((error) => {
-      console.error('Failed to load PayPal script:', error);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (isCartOpen) {
-      window.scrollTo(0, 0); // Scroll to the top of the page
-    }
-  }, [isCartOpen]);
-
-  console.log('cart',cart);
 
   return (
     <Sheet open={isCartOpen} onOpenChange={closeCart}>
@@ -161,7 +128,7 @@ const CartModal = () => {
              Buy Now
             </Button>
             <br/><br/>
-            <PayPalButton onPaymentSuccess={handlePaymentSuccess} />
+            <PayPalButton/>
           </div>
           <br/>
           <div className="mt-6 flex justify-left text-center text-xl text-gray-500">

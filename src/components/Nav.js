@@ -32,7 +32,8 @@ const links = [
 const Nav = () => {
     const pathname = usePathname();
     const {cart, openCart} = useCart();
-    
+
+    const [totalQuantity,setTotalQuantity] = useState(0);
 
     const [isSticky, setIsSticky] = useState(false);
 
@@ -53,11 +54,18 @@ const Nav = () => {
       };
     }, []);
 
-    const totalQuantity = cart.reduce(
-      (total, product) => total + product.quantity,
-      0
-    );
-    console.log('total quantity',totalQuantity);
+    useEffect(() => {
+    const calculateTotalQuantity = () => {
+      return cart.reduce((total,product) => total + product.quantity,0);
+    };
+    setTotalQuantity (calculateTotalQuantity());
+    }, [cart]);
+
+    // const totalQuantity = cart.reduce(
+    //   (total, product) => total + product.quantity,
+    //   0
+    // );
+    // console.log('total quantity',totalQuantity);
 
   return (
     
