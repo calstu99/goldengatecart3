@@ -2,7 +2,7 @@
 
 import { Button } from "../../../components/ui/button";
 import { Star, Truck } from "lucide-react";
-import products from "../../../app/data/products";
+import products from "../../../app/data/products"; // from Json file
 import ImageGallery from "../../../components/ImageGallery";
 
 

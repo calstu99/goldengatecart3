@@ -73,23 +73,39 @@ const Hero = () => {
     <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
       <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border border-violet-300">
         <Link
-          href="/category/Men"
+          href="/collection/Men"
           className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
         >
           Men
         </Link>
         <Link
-          href="/category/Women"
+          href="/collection/Women"
           className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
         >
           Women
         </Link>
         <Link
-          href="/category/Teens"
+          href="/collection/Knives"
           className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
         >
-          Teens
+          Knives
         </Link>
+      </div>
+
+      <div className="flex h-12 w-64 bg-orange-500 divide-x overflow-hidden rounded-lg border border-violet-300">
+        <Link
+          href="/specials"
+          className="flex  w-1/2 items-center justify-center text-white transition duration-100 hover:bg-orange-500 active:bg-orange-600"
+        >
+          March Specials!
+        </Link>
+        <Link
+          href="/specials?collectionHandles=knives"
+          className="flex w-1/2 items-center justify-center text-white transition duration-100 hover:bg-orange-500 active:bg-orange-600"
+        >
+         Knife Specials!
+        </Link>
+      
       </div>
     </div>
   </section>

@@ -1,6 +1,29 @@
 @tailwind base;
-  @tailwind components;
-  @tailwind utilities;
+
+* {
+  /* scrollbar-width: thin; */
+  /* scrollbar-color: var(--secondary) var(--primary); */
+  scrollbar-color: var(--scroll-p) var(--scroll-s);
+  
+}
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scroll-p);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-s);
+  border-radius: 14px;
+  border: 3px solid var(--scroll-p);
+}
+
+@tailwind components;
+@tailwind utilities;
 
   @layer base {
     :root {
@@ -24,6 +47,8 @@
       --input: 220 13% 91%;
       --ring: 262.1 83.3% 57.8%;
       --radius: 0.5rem;
+      --scroll-p: 240 5.9% 90%;
+      --scroll-s: 0 0% 98%;
     }
   
     .dark {

@@ -25,6 +25,7 @@ export const POST = async (request) => {
       if (stripeProduct == undefined) {
         const prod = await stripe.products.create({
           name: product.name,
+          // images: [product.imageUrl], // Add the product image URL here
           default_price_data: {
             unit_amount: product.price * 100,
             currency: "usd",
@@ -49,6 +50,7 @@ export const POST = async (request) => {
       stripeItems.push({
         price: stripeProduct?.default_price,
         quantity: product?.quantity,
+        // images: product?.imageUrl ? [String(product?.imageUrl)] : [], // Add the product image URL here
       });
     }
   }

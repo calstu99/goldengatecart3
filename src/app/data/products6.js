@@ -4,68 +4,214 @@ import { useState, useEffect } from 'react';
 import { createStorefrontApiClient } from '@shopify/storefront-api-client';
 import { useCart } from "../../components/CartContext";
 
+import ProductCard from '../../components/ProductCard';
+import ProductVariants from '../../components/ProductVariants';
+
+// const client = createStorefrontApiClient({
+//   storeDomain: 'hab-goldengate.myshopify.com',
+//   apiVersion: '2024-01',
+//   publicAccessToken: '2b6b637cda36bc645c35699c9d2941a9',
+// });
+
 const client = createStorefrontApiClient({
-  storeDomain: 'hab-goldengate.myshopify.com',
-  apiVersion: '2024-01',
-  publicAccessToken: '2b6b637cda36bc645c35699c9d2941a9',
+  storeDomain: process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN,
+  apiVersion: process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION,
+  publicAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_PUBLIC_ACCESS_TOKEN,
 });
 
+// original 
+
+// const getAllProductsQuery = `
+//   query getAllProducts($first: Int, $after: String) {
+//     products(first: $first, after: $after) {
+//       pageInfo {
+//         hasNextPage
+//         endCursor
+//       }
+//       edges {
+//         node {
+//           id
+//           title
+//           handle
+//           description
+//           priceRange {
+//             minVariantPrice {
+//               amount
+//               currencyCode
+//             }
+//             maxVariantPrice {
+//               amount
+//               currencyCode
+//             }
+//           }
+//           totalInventory
+//           variants(first: 10) {
+//             edges {
+//               node {
+//                 id
+//                 title
+//                 sku
+//                 availableForSale
+//                 price {
+//                   amount
+//                   currencyCode
+//                 }
+//                 compareAtPrice {
+//                   amount
+//                   currencyCode
+//                 }
+//                 quantityAvailable
+//               }
+//             }
+//           }
+//           images(first: 5) {
+//             edges {
+//               node {
+//                 src
+//                 altText
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
+
+// // 2nd update
+// const getAllProductsQuery = `
+//   query getAllProducts($first: Int, $after: String) {
+//     products(first: $first, after: $after) {
+//       pageInfo {
+//         hasNextPage
+//         endCursor
+//       }
+//       edges {
+//         node {
+//           id
+//           title
+//           handle
+//           description
+//           priceRange {
+//             minVariantPrice {
+//               amount
+//               currencyCode
+//             }
+//             maxVariantPrice {
+//               amount
+//               currencyCode
+//             }
+//           }
+//           totalInventory
+//           variants(first: 10) {
+//             edges {
+//               node {
+//                 id
+//                 title
+//                 sku
+//                 availableForSale
+//                 price {
+//                   amount
+//                   currencyCode
+//                 }
+//                 compareAtPrice {
+//                   amount
+//                   currencyCode
+//                 }
+//                 quantityAvailable
+//                 image {
+//                   src
+//                   altText
+//                 }
+//               }
+//             }
+//           }
+//           images(first: 5) {
+//             edges {
+//               node {
+//                 src
+//                 altText
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
+
+// 2nd update
 const getAllProductsQuery = `
-  query getAllProducts($first: Int, $after: String) {
-    products(first: $first, after: $after) {
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      edges {
-        node {
-          id
-          title
-          handle
-          description
-          priceRange {
-            minVariantPrice {
-              amount
-              currencyCode
-            }
-            maxVariantPrice {
-              amount
-              currencyCode
-            }
+query getAllProducts($first: Int, $after: String) {
+  products(first: $first, after: $after) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        title
+        handle
+        description
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
           }
-          totalInventory
-          variants(first: 10) {
-            edges {
-              node {
-                id
-                title
-                sku
-                availableForSale
-                price {
-                  amount
-                  currencyCode
-                }
-                compareAtPrice {
-                  amount
-                  currencyCode
-                }
-                quantityAvailable
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        totalInventory
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              title
+              sku
+              availableForSale
+              price {
+                amount
+                currencyCode
               }
-            }
-          }
-          images(first: 5) {
-            edges {
-              node {
+              compareAtPrice {
+                amount
+                currencyCode
+              }
+              quantityAvailable
+              image {
                 src
                 altText
               }
             }
           }
         }
+        images(first: 5) {
+          edges {
+            node {
+              src
+              altText
+            }
+          }
+        }
+        collections(first: 10) {
+          edges {
+            node {
+              id
+              title
+              handle
+            }
+          }
+        }
       }
     }
   }
+}
 `;
+
+
 
 const LandingPage = () => {
   const [products, setProducts] = useState([]);
@@ -105,17 +251,23 @@ const LandingPage = () => {
         }
 
         setProducts(allProducts);
+        
         console.log('allProducts', allProducts);
       } catch (error) {
         setError(error);
       } finally {
         setLoading(false);
       }
+
+       // Fetch products when the component mounts
     };
+     
+    
+    // Fetch products every 300 seconds
+    // const interval = setInterval(fetchAllProducts, 30000); // Update every 30 seconds
 
-    const interval = setInterval(fetchAllProducts, 30000); // Update every 30 seconds
-
-    return () => clearInterval(interval); // Clean up the interval on component unmount
+    // return () => clearInterval(interval); // Clean up the interval on component unmount
+    fetchAllProducts();
   }, []);
 
 //   const addToCart = (product) => {
@@ -133,11 +285,13 @@ const LandingPage = () => {
   return (
     <div className="bg-gray-100 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-extrabold text-gray-900 mb-8">Featured Products</h2>
+        {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-8">Featured Products</h2> */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {products.map((product) => (
-            <div key={product.id} className="bg-white shadow-md rounded-lg overflow-hidden">
-              {product.images.edges.length > 0 && (
+            // <div key={product.id} className="bg-white shadow-md rounded-lg overflow-hidden">
+            <div key={product.id} className="flex flex-col items-center justify-center shadow-md rounded-lg overflow-hidden">
+
+              {/* {product.images.edges.length > 0 && (
                 <img
                   src={product.images.edges[0].node.src}
                   alt={product.images.edges[0].node.altText}
@@ -161,9 +315,19 @@ const LandingPage = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
+              <ProductCard
+                key={product.id}
+                product={product}
+                onShowVariants={showVariants}
+                onAddToCart={addToCart}
+                selectedProduct={selectedProduct}
+                onCloseVariants={() => setSelectedProduct(null)}
+              />
+
+            
               
-              {selectedProduct && selectedProduct.id === product.id && (
+              {/* {selectedProduct && selectedProduct.id === product.id && (
                 <div className="bg-white shadow-md rounded-lg p-4 mt-4">
                   <h4 className="text-lg font-medium text-gray-900 mb-2">Variants</h4>
                   <p>Name: {selectedProduct.handle}</p>
@@ -194,7 +358,7 @@ const LandingPage = () => {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
 
             </div>
           ))}

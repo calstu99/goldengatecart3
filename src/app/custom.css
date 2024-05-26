@@ -19,4 +19,42 @@
     white-space: nowrap;
   }
 
+  .product-variants-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .product-variants-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 70vw; /* Increase the width to 80% of the viewport width */
+    max-height: 95vh; /* Increase the max-height to 80% of the viewport height */
+    overflow: auto;
+  }
   
+  /* .product-variants-modal {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+  } */
+
+  .variant-image {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+

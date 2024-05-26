@@ -2,12 +2,30 @@
 
 import React from "react";
 import { useCart } from "./CartContext";
+import { toast } from 'react-hot-toast';
 
 const Product = ({ product }) => {
   const { addToCart, cart } = useCart();
-
   const isProductInCart = cart.some((item) => item.id === product.id);
   const isProductAvailable = product.quantity > 0;
+
+  const handleAddToCart = () => {
+    addToCart(product);
+    // https://codenestors.com/blog/react-hot-toast-setup-in-next-js
+    // https://react-hot-toast.com/
+    toast.success(`${product.name} has been added to your cart.`,
+    {
+      duration: 3000, // Display duration in milliseconds
+      position: 'bottom-right', // Change toast position
+      style: {
+        // Customize style
+        border: '2px solid #333',
+        color: '#fff',
+        backgroundColor: '#333',
+      },
+    }
+  ); // Displays a success message
+  };
 
   return React.createElement(
     "div",
@@ -19,7 +37,8 @@ const Product = ({ product }) => {
       ? React.createElement(
           "button",
           {
-            onClick: () => addToCart(product),
+            // onClick: () => addToCart(product),
+            onClick: handleAddToCart,
             disabled: isProductInCart,
             className: `px-2 py-1.5 ${
               isProductInCart

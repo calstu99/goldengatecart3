@@ -5,7 +5,7 @@ import Newest from './Newest';
 import ProductList from '../app/data/products3';
 // import LandingPage from '../app/data/products4';
 // import LandingPage from '../app/data/products5';
-import LandingPage from '../app/data/products6';
+import LandingPage from './data/products7';
 
 
 

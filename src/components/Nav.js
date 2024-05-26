@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 import { useCart } from "./CartContext";
 import  { useState, useEffect } from 'react';
 
+import { signOut, useSession } from "next-auth/react";
+
 import Image from 'next/image';
 // import logo from '../../public/next.svg';
 import logo from '../components/logo.svg';
@@ -27,15 +29,14 @@ const links = [
     { name: "Teens", href: "/Teens" },
   ];
 
-
-
 const Nav = () => {
     const pathname = usePathname();
     const {cart, openCart} = useCart();
-
     const [totalQuantity,setTotalQuantity] = useState(0);
-
     const [isSticky, setIsSticky] = useState(false);
+
+    const { data: session } = useSession();
+    console.log('session',session);
 
     useEffect(() => {
       const handleScroll = () => {
@@ -61,18 +62,9 @@ const Nav = () => {
     setTotalQuantity (calculateTotalQuantity());
     }, [cart]);
 
-    // const totalQuantity = cart.reduce(
-    //   (total, product) => total + product.quantity,
-    //   0
-    // );
-    // console.log('total quantity',totalQuantity);
-
   return (
-    
-        <Sheet >
-
-        
-        {/* <header className="mb-8 border-b"> */}
+    <Sheet >
+      {/* <header className="mb-8 border-b"> */}
       <header className={`${isSticky ? 'sticky' : ''} mb-8 border-b`}>
         <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
           <Link href="/">
@@ -80,15 +72,13 @@ const Nav = () => {
               GoldenGate<span className="text-primary">Cart </span>
             </h1>
           </Link>
-
-
           <Image
             src={logo}
             alt="Logo"
             width={40}
             height={40}
+      
           />
-
           <nav className="hidden gap-12 lg:flex 2xl:ml-16">
             {links.map((link, idx) => (
               <div key={idx}>
@@ -110,29 +100,15 @@ const Nav = () => {
               </div>
             ))}
           </nav>
-            {/* https://tailwindcss.com/docs/divide-color*/}
-          <div className="flex divide-x border-r sm:border-1 border-solid border-gray-100 ">
-
-            {/* <Button
+          {/* https://tailwindcss.com/docs/divide-color*/}
+          <div className="flex sm:border-1 border-solid border-gray-100 ">
+            <button
               variant={"outline"}
               onClick={() => openCart()}
-              className="flex flex-col gap-y-1.5 h-12 w-12 sm:h-20 sm:w-20 md:h-24 md:w-24 rounded-none"
-            >
-
-              <ShoppingBag size={25} color="#6d28d9" />
-              <span class='badge badge-warning' id='lblCartCount'> 5 </span>
-              <span className="hidden text-xs font-semibold text-gray-500 sm:block">
-                Cart
-              </span>
-            </Button> */}
-            
-            <button
-            variant={"outline"}
-            onClick={() => openCart()}
               className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
               aria-label="Cart"
             >
-              <ShoppingBag size={25} color="#6d28d9" />
+              <ShoppingBag size={25} color="#6d28d9" strokeWidth={1} />
               {totalQuantity > 0 && (
                 <span className="absolute inset-0 object-right-top -mr-6">
                   <div className="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
@@ -141,20 +117,59 @@ const Nav = () => {
                 </span>
               )}
             </button>
+            {/* <button  
+            onClick={() => { signOut(); }}>
+              Login
+            </button>
+            <button  
+            onClick={() => { signOut(); }}>
+              Logout
+            </button> */}
+
+            <div className="flex flex-1 items-center justify-end gap-x-2">
+              {!session ? (
+                <>
+                  <Link
+                    href="/login"
+                    className=" ml-2 hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900"
+                  >
+                    Log in
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="ml-2 rounded-md bg-black px-3 py-2 border border-gray-500 border-1 text-sm font-semibold text-white shadow-sm hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
+                    Sign up
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <span className="ml-10 text-sm">{session.user?.email}</span>
+
+                  <button
+                    onClick={() => {
+                      signOut();
+                    }}
+                    className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900"
+                  >
+                    Log out
+                  </button>
+                </>
+              )}
+            </div>
+
+
 
           </div>
+        
+
+
           <div>
-
           </div>
-
-
         </div>
       </header>
-
-      
-        </Sheet>
-      );
+    </Sheet>
+  );
   
 }
-
 export default Nav
