@@ -57,6 +57,7 @@ export const authOptions = {
           return false;
         }
 
+
       if (account.provider == "credentials") {
         return true;
       }
