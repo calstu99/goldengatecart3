@@ -12,6 +12,7 @@ export const authOptions: AuthOptions  = {
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
+       // ... your CredentialsProvider configuration
       id: "credentials",
       name: "Credentials",
       credentials: {
@@ -41,6 +42,7 @@ export const authOptions: AuthOptions  = {
       clientSecret: process.env.GITHUB_SECRET ?? "",
     }),
     GoogleProvider({
+            // ... your GoogleProvider configuration
       clientId: process.env.GOOGLE_ID ?? "",
       clientSecret: process.env.GOOGLE_SECRET ?? "",
     }),
