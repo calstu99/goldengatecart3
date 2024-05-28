@@ -32,6 +32,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "20.12.7",
     "@types/react": "18.2.79",
     "postcss": "^8",
