@@ -29,8 +29,12 @@ const client = createStorefrontApiClient({
 
 // const collectionHandlesToFetch = ['men', 'knives', 'car'];
 // const collectionHandlesToFetch = ['knives'];
-const collectionHandlesToFetch = process.env.NEXT_PUBLIC_COLLECTION_HANDLES_TO_FETCH.split(',');
+// const collectionHandlesToFetch = process.env.NEXT_PUBLIC_COLLECTION_HANDLES_TO_FETCH.split(',');
 
+
+const collectionHandlesToFetch = process.env.NEXT_PUBLIC_COLLECTION_HANDLES_TO_FETCH.split(',').map(function (value) {
+  return value.trim();
+});
 
 
 // GraphQL query to Shopify

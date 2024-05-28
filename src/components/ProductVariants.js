@@ -15,11 +15,15 @@ import { Star,Truck } from 'lucide-react';
 
 import ImageGallery from  '@/components/ImageGallery_new';
 
+import {useSession } from "next-auth/react";
+
 
 const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
   const modalRef = useRef(null);
   const { cart } = useCart();
   const [showFullDescription, setShowFullDescription] = useState(false);
+  const { data: session } = useSession();
+  console.log('session user', session?.user?.email);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -111,26 +115,54 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
                      
                        <br/>
                        {selectedProduct.totalInventory > 0 ? (
-                         <button
-                           onClick={() =>
-                           addToCart({
-                               id: selectedProduct.id,
-                               name: selectedProduct.title,
-                               quantity: parseInt(selectedProduct.totalInventory),
-                              price: parseFloat(selectedProduct.priceRange.minVariantPrice.amount),
-                             imageUrl: selectedProduct.images.edges[0].node.src,
-                             })
-                           }
-                           className={`bg-blue-500 hover:bg-grey-600 text-white font-medium py-2 px-4 rounded text-xs ${cart.some((item) => item.id === selectedProduct.id)
-                             ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                             : 'bg-green-500 hover:bg-green-600'
-                           }`}
-                           disabled={cart.some((item) => item.id === selectedProduct.id)}
-                         >
-                           {cart.some((item) => item.id === `${selectedProduct.id}`)
-                             ? 'Added to Cart'
-                             : 'Add to Cart'}
-                         </button>
+
+
+                        //  <button
+                        //    onClick={() =>
+                        //    addToCart({
+                        //        id: selectedProduct.id,
+                        //        name: selectedProduct.title,
+                        //        quantity: parseInt(selectedProduct.totalInventory),
+                        //       price: parseFloat(selectedProduct.priceRange.minVariantPrice.amount),
+                        //      imageUrl: selectedProduct.images.edges[0].node.src,
+                        //      })
+                        //    }
+                        //    className={`bg-blue-500 hover:bg-grey-600 text-white font-medium py-2 px-4 rounded text-xs ${cart.some((item) => item.id === selectedProduct.id)
+                        //      ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                        //      : 'bg-green-500 hover:bg-green-600'
+                        //    }`}
+                        //    disabled={cart.some((item) => item.id === selectedProduct.id)}
+                        //  >
+                        //    {cart.some((item) => item.id === `${selectedProduct.id}`)
+                        //      ? 'Added to Cart'
+                        //      : 'Add to Cart'}
+                        //  </button>
+
+                      <button
+                        onClick={() =>
+                          addToCart({
+                            id: selectedProduct.id,
+                            name: selectedProduct.title,
+                            quantity: parseInt(selectedProduct.totalInventory),
+                            price: parseFloat(
+                              session
+                                ? selectedProduct.priceRange.minVariantPrice.amount * 1.0
+                                : selectedProduct.priceRange.minVariantPrice.amount
+                            ),
+                            imageUrl: selectedProduct.images.edges[0].node.src,
+                          })
+                        }
+                        className={`bg-blue-500 hover:bg-grey-600 text-white font-medium py-2 px-4 rounded text-xs ${cart.some((item) => item.id === selectedProduct.id)
+                            ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                            : 'bg-green-500 hover:bg-green-600'
+                          }`}
+                        disabled={cart.some((item) => item.id === selectedProduct.id)}
+                      >
+                        {cart.some((item) => item.id === `${selectedProduct.id}`)
+                          ? 'Added to Cart'
+                          : 'Add to Cart'}
+                      </button>
+
                          
                          
                        ) : (

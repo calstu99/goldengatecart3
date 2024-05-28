@@ -73,19 +73,22 @@ const Hero = () => {
     <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
       <div className="flex h-12 w-64 divide-x overflow-hidden rounded-lg border border-violet-300">
         <Link
-          href="/collection/Men"
+          // href="/collection/Men"
+          href="/specials?collectionHandles=men"
           className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
         >
           Men
         </Link>
         <Link
-          href="/collection/Women"
+          // href="/collection/Women"
+          href="/specials?collectionHandles=women"
           className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
         >
           Women
         </Link>
         <Link
-          href="/collection/Knives"
+          // href="/collection/Knives"
+          href="/specials?collectionHandles=knives"
           className="flex w-1/3 items-center justify-center text-gray-500 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
         >
           Knives
@@ -94,7 +97,8 @@ const Hero = () => {
 
       <div className="flex h-12 w-64 bg-orange-500 divide-x overflow-hidden rounded-lg border border-violet-300">
         <Link
-          href="/specials"
+          // href="/specials"
+          href="/specials?collectionHandles=march_specials"
           className="flex  w-1/2 items-center justify-center text-white transition duration-100 hover:bg-orange-500 active:bg-orange-600"
         >
           March Specials!

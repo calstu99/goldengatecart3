@@ -131,7 +131,7 @@ const NextLoginPage = () => {
                   </label>
                 </div>
 
-                <div className="text-sm leading-6">
+                <div className="ml-2 text-sm leading-6">
                   <Link
                     href="#"
                     className="text-black hover:text-gray-900"
@@ -144,7 +144,7 @@ const NextLoginPage = () => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full border border-black justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="mt-2 flex w-full border border-black justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   Sign in
                 </button>

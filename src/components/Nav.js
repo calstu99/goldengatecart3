@@ -137,7 +137,7 @@ const Nav = () => {
                   </Link>
                   <Link
                     href="/register"
-                    className="ml-2 rounded-md bg-black px-3 py-2 border border-gray-500 border-1 text-sm font-semibold text-white shadow-sm hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="ml-2 rounded-md bg-purple-500 px-3 py-2 border border-gray-500 border-1 text-xs font-semibold text-white shadow-sm hover:bg-slate-50 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
                     Sign up
                   </Link>

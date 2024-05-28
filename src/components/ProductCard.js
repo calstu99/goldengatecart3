@@ -18,12 +18,12 @@ const ProductCard = ({ product, onShowVariants, onAddToCart, selectedProduct,onC
         <h3 className="text-sm text-gray-950 font-medium mb-2">{product.title}</h3>
         <p className="text-gray-500 font-normal mb-4 line-clamp-4 text-sm">{product.description}</p>
         <div className="flex justify-between items-center">
-          <p className="text-gray-900 font-medium">
+          <p className="text-sm text-gray-900 font-medium">
             {'$'}
             {product.priceRange.minVariantPrice.amount}{' '}
             {product.priceRange.minVariantPrice.currencyCode}
           </p>
-          <Link href={`/products/${product.handle}`}>Product</Link>
+          {/* <Link href={`/products/${product.handle}`}>Product</Link> */}
           <div className="flex space-x-2">
             <button
               onClick={() => onShowVariants(product)}
