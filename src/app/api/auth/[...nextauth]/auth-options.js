@@ -51,10 +51,16 @@ export const authOptions = {
   callbacks: {
     async signIn(params) {
       const {user, account } = params;
-      if (account?.provider == "credentials") {
+
+        // Check if account is null
+        if (!account) {
+          return false;
+        }
+
+      if (account.provider == "credentials") {
         return true;
       }
-      if (account?.provider == "github") {
+      if (account.provider == "github") {
         await connect();
         try {
           const existingUser = await User.findOne({ email: user.email });
@@ -73,7 +79,7 @@ export const authOptions = {
         }
       }
 
-      if(account?.provider == "google"){
+      if(account.provider == "google"){
         await connect();
         try {
           const existingUser = await User.findOne({ email: user.email });
