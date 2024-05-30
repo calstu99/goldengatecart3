@@ -31,12 +31,12 @@ export async function GET(request) {
         postalCode: "95842",
         country: "USA",
       },
-      paymentMethod: {
-        cardType: "Visa",
-        cardNumber: "1234567890123456",
-        expiryDate: "12/25",
-        cardHolderName: "John Doe",
-      },
+      // paymentMethod: {
+      //   cardType: "Visa",
+      //   cardNumber: "1234567890123456",
+      //   expiryDate: "12/25",
+      //   cardHolderName: "John Doe",
+      // },
     });
 
     // Save the sample order

@@ -73,7 +73,7 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
 
           <button className="ml-auto" onClick={onCloseVariants}>
             <div className="rounded-full bg-gray-200 p-2">
-              <Minimize2 />
+              <Minimize2 size={35} strokeWidth={1.0}/>
             </div>
           </button>
           <br/>
