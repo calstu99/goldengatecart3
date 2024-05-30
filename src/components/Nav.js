@@ -205,7 +205,7 @@ const Nav = () => {
                 onClick={toggleMobileMenu}
                 aria-label="Toggle Menu"
               >
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6 mr-4" />
               </button>
             </div>
 
@@ -291,6 +291,7 @@ const Nav = () => {
                     className="ml-2"
                   />
                 </div>
+             
                
                 <div className="lg:hidden">
                 
@@ -331,13 +332,19 @@ const Nav = () => {
                           >
                             Log out
                           </button>
+                          
                         )}
                       </div>
+                      <button className="ml-auto" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className="rounded-full bg-gray-200 p-2">
+                          <Minimize2 />
+                        </div>
+                      </button>
                     </div>
                   </div>
                 </div>
                 <br /><br />
-          <button onClick={() => setIsMobileMenuOpen(false)}><Minimize2 /></button>
+       
               </DialogPanel>
             </div>
           </Dialog>

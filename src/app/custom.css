@@ -34,11 +34,11 @@
 
   .product-variants-modal {
     background-color: white;
-    padding: 2rem;
+    padding: 1.7rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    width: 70vw; /* Increase the width to 80% of the viewport width */
-    max-height: 95vh; /* Increase the max-height to 80% of the viewport height */
+    width: 90vw; /* Increase the width to 80% of the viewport width */
+    max-height: 98vh; /* Increase the max-height to 80% of the viewport height */
     overflow: auto;
   }
   

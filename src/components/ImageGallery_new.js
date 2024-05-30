@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
+import Zoom from 'react-medium-image-zoom'
 
 export default function ImageGallery({ images }) {
   const [bigImage, setBigImage] = React.useState(images[0]);
@@ -40,14 +41,15 @@ export default function ImageGallery({ images }) {
               width={600}
               height={600}
               alt="photo"
-              className="h-full w-full object-cover object-center cursor-pointer"
+              className="h-full w-full object-cover object-center cursor-pointer md:w-[100px] md:h-[100px]"
               onClick={() => handleSmallImageClick(image)}
             />
           </div>
         ))}
       </div>
 
-      <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
+      <div className="relative overflow-hidden rounded-lg bg-white-100 lg:col-span-4 ">
+        <Zoom>
         <Image
           src={bigImage.node.src}
           alt="Photo"
@@ -55,8 +57,9 @@ export default function ImageGallery({ images }) {
           height={500}
           className="h-auto w-full object-contain" // Change object-cover to object-contain
         />
+        </Zoom>
 
-        <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm uppercase tracking-wider text-white">
+        <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm md:text-xs uppercase tracking-wider text-white">
           Sale
         </span>
       </div>
