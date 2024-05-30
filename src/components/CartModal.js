@@ -156,16 +156,20 @@ const CartModal = () => {
           
           <br/>
         </SheetHeader>
-        <div className='pb-20 max-h-screen overflow-y-auto scrollbar-thumb-gray-200 scrollbar-track-gray-100 '>
+        <div className='pb-40 max-h-screen overflow-y-auto scrollbar-thumb-gray-200 scrollbar-track-gray-100 '>
         <div>
           {cart.length > 0 ? (
             <>
 
               <div className="mt-4">
                   <div className="flex items-center">
-                    <ShoppingBag color="#3e9392" size={25} strokeWidth={0.9} className="mr-2" />
+                    <ShoppingCart color="#6d28d9" size={30} strokeWidth={1.2} className="mr-2" />
                     <p className="text-lg font-medium">
-                      {`Subtotal (${totalQuantity} items): $${totalAmount.toFixed(2)}`}
+                      {/* {`Subtotal (${totalQuantity} items): $${totalAmount.toFixed(2)}`} */}
+                      {/* <span>Subtotal {totalQuantity > 1 ? `(${totalQuantity} items):  $${totalAmount.toFixed(2)}` : `(${totalQuantity} item): $${totalAmount.toFixed(2)} `}  </span> */}
+                      <span>
+                        Subtotal {totalQuantity > 1 ? `(${totalQuantity} items): $${totalAmount.toLocaleString()}` : `(${totalQuantity} item): $${totalAmount.toLocaleString()}`}
+                      </span>
                     </p>
                   </div>
                 {/* <button
@@ -177,9 +181,10 @@ const CartModal = () => {
                 <br /><br />
                 <div>
                 <Button 
+                className = "bg-[#345f81] hover:bg-[#224d6f]"
                 onClick={checkout}>
                 <CreditCard color="#ffffff" size={25} strokeWidth={0.9} className="mr-2" />
-                 Proceed to checkout
+                 Credit card
                 </Button>
                 </div>
                 
@@ -237,9 +242,9 @@ const CartModal = () => {
                     />
                   </div>
 
-                  <p className="font-light text-grey-500 text-sm">
+                  <p className="font-light text-grey-500 text-sm line-clamp-1">
                     {/* ${product.price.toFixed(2)} x {product.quantity} */}
-                   Qty:{product.quantity} {product.name}
+                    <span className='font-bold' >Qty:{product.quantity}</span> {product.name}
                   </p>
                   <p className="font-bold text-grey-500 text-sm mb-2">
                   Price: ${product.price.toFixed(2)}
@@ -277,11 +282,25 @@ const CartModal = () => {
             ))}
           </ul>
         </div>
-          <div>
-          <p className="mt-8 font-bold text-lg">
+          
+          {/* <div className="pt-0 fixed bottom-0 right-80 bg-white p-4 bg-zinc-50/95">
+          <p className="mt-6 font-bold text-md">
             {`Subtotal: $${totalAmount.toFixed(2)}`}
           </p>
-          </div>
+          </div> */}
+
+          {cart.length > 0 ? (
+            <div className="fixed bottom-0 right-0 bg-white p-4 w-full sm:w-auto sm:mr-4">
+              <p className="mt-6 text-xl font-bold text-right">
+                {/* {`Subtotal: $${totalAmount.toFixed(2)}`} */}
+                {/* <span>Subtotal {totalQuantity > 1 ? `(${totalQuantity} items):  $${totalAmount.toFixed(2)}` : `(${totalQuantity} item): $${totalAmount.toFixed(2)} `}  </span> */}
+                <span>
+                  Subtotal {totalQuantity > 1 ? `(${totalQuantity} items): $${totalAmount.toLocaleString()}` : `(${totalQuantity} item): $${totalAmount.toLocaleString()}`}
+                </span>
+              </p>
+            </div>
+          ) : <div></div>
+          }
           
         {/* <div>
           {cart.length > 0 ? (
