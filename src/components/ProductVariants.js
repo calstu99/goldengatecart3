@@ -130,6 +130,9 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
                     <Truck className="w-6 h-6" />
                     <span className="text-sm">2-4 Day Free Shipping</span>
                   </div>
+                  <span className="text-sm">{selectedProduct.totalInventory > 0 ? `${selectedProduct.totalInventory} items left` : null}</span>
+
+
                   <div>
                     <br />
                     {selectedProduct.totalInventory > 0 ? (
@@ -168,7 +171,10 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
                       {0 < selectedProduct.totalInventory && selectedProduct.totalInventory < 6 ? (
                         <span className="text-lg font-medium text-red-500">Almost sold out</span>
                       ) : (
-                        <span>{selectedProduct.totalInventory > 0 ? `${selectedProduct.totalInventory} items left` : null}</span>
+                        <>
+                        <br/>
+                        {/* <span>{selectedProduct.totalInventory > 0 ? `${selectedProduct.totalInventory} items left` : null}</span> */}
+                        </>
                       )}
                     </span>
                   </div>

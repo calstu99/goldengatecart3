@@ -219,6 +219,9 @@ const LandingPage = () => {
     setFilteredProducts(filtered);
   };
 
+  const bestSellerProducts = products.filter(product => product.tags.includes("best seller"));
+
+
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -234,6 +237,23 @@ const LandingPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-8">Featured Products</h2> */}
         
+        <h1 className="text-3xl font-bold text-gray-900 mb-8">Our Best Sellers</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {
+            bestSellerProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                onShowVariants={showVariants}
+                onAddToCart={addToCart}
+                selectedProduct={selectedProduct}
+                onCloseVariants={() => setSelectedProduct(null)}
+              />
+            ))
+          }
+        </div>
+      <br/>
+
         <div className="mb-4 text-sm">
           <input
             type="text"
@@ -252,7 +272,12 @@ const LandingPage = () => {
             Search
           </button>
         </div>
-              
+        
+
+
+
+
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
