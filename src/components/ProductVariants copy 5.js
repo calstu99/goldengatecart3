@@ -11,7 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Star,Truck,Minimize2,Circle} from 'lucide-react';
+import { Star,Truck,Minimize2 } from 'lucide-react';
 
 import Rating from './Rating'; 
 
@@ -61,7 +61,7 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
         return 'bg-zinc-50';
       // Add more cases for additional colors
       default:
-        return 'bg-transparent';
+        return 'bg-red-500';
     }
   };
   
@@ -166,7 +166,7 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
 
                     <span className="text-gray-500 text-sm ml-4">
                       {0 < selectedProduct.totalInventory && selectedProduct.totalInventory < 6 ? (
-                        <span className="text-lg font-medium text-red-500">Almost sold out</span>
+                        <span className="text-red-500">Almost sold out</span>
                       ) : (
                         <span>{selectedProduct.totalInventory > 0 ? `${selectedProduct.totalInventory} items left` : null}</span>
                       )}
@@ -180,12 +180,11 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
               <CarouselContent>
                 {selectedProduct.variants.edges.map((variant) => (
                   <CarouselItem key={variant.node.id} className="flex">
-                    <div className="flex flex-col md:flex-row"> 
-                    <div className="flex-1 pr-4">
+                    <div className="w-1/2 pr-4">
                       {/* <h2>Number of items: {selectedProduct.variants.edges.length}</h2> */}
                       {/* <div className='text-2xl text-slate-700 hover:text-blue-600 font-extrabold'>{selectedProduct.title}</div> */}
                       <div className='lg:text-xl md:text-lg text-slate-700 hover:text-blue-600 font-semibold mb-4'>
-                        {/* {selectedProduct.title} */}
+                        {selectedProduct.title}
                       </div>
                       {variant.node.image && (
                         <Zoom>
@@ -198,10 +197,8 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
                         </Zoom>
                       )}
                     </div>
-                    <div className="flex-1 pl-4">
-                      {/* <p className="text-md text-gray-950 font-medium mb-2">{selectedProduct.title} - {variant.node.title}</p> */}
-                      <p className="text-md text-gray-950 font-medium mb-2">{selectedProduct.title}</p>
-                      
+                    <div className="w-1/2 pl-4">
+                      <p className="text-md text-gray-950 font-medium mb-2">{selectedProduct.title} - {variant.node.title}</p>
                       <p className="text-sm text-gray-950 font-medium mb-2">About this item:</p>
                       {/* <p className="text-xs text-gray-500 font-normal line-clamp-6 mb-2">{selectedProduct.description}</p> */}
                       <p className={`text-xs text-gray-500 font-normal mb-2 ${showFullDescription ? '' : 'line-clamp-3'}`}>
@@ -227,24 +224,7 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
                         <p className="text-sm text-gray-500 font-medium mb-2">
                           Color: {variant.node.title.match(/\s(.*)/)[1].replace(/\//g, '')}
                         </p>
-
                       )}
-                        {/* <button>
-                          <div
-                            className={`rounded-full p-4 ${getColorClass(
-                              variant.node.title?.match(/\s(.*)/)?.[1]?.replace(/\//g, '') || ''
-                            )}`}
-                          >
-                            <Circle size={5} strokeWidth={0} />
-                          </div>
-                        </button> */}
-                               
-                        <button>
-                          <div className={`rounded-full p-4 ${getColorClass(variant.node.title)}`}>
-                            <Circle size={5} strokeWidth={0} />
-                          </div>
-                        </button>
-                        <br/>
                       {variant.node.quantityAvailable > 0 ? (
                         <button
                           onClick={() =>
@@ -270,10 +250,8 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
                             : 'Add to Cart'}
                         </button>
                       ) : (
-                        
-                        <p className="text-red-500 font-medium text-lg">Sold Out</p>
+                        <p className="text-red-500 font-medium text-xs">Sold Out</p>
                       )}
-                    </div>
                     </div>
                   </CarouselItem>
                 ))}
