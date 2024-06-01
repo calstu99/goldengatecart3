@@ -32,7 +32,8 @@ const ProductCard = ({ product, onShowVariants, onAddToCart, selectedProduct,onC
              {/* {product.variants.edges.length} item */}
              <div className='text-xs'>
               <p>
-                {product.variants.edges.length} {product.variants.edges.length === 1 ? 'item' : 'items'}
+                {/* {product.variants.edges.length} {product.variants.edges.length === 1 ? 'item' : 'items'} */}
+              SHOP
               </p>
               </div>
             </button>

@@ -8,6 +8,7 @@ import ProductVariants from '../../components/ProductVariants';
 import { ShoppingBasket} from 'lucide-react';
 import Link from "next/link";
 import Image from 'next/image';
+import Zoom from 'react-medium-image-zoom'
 
 
 // (Storefront API client configuration and GraphQL query)
@@ -362,6 +363,7 @@ const LandingPage = () => {
            bestSellerProducts.map((product,idx) => (
             <>
           <div key = {idx} className="overflow-hidden rounded-lg bg-gray-100">
+            <Zoom>
             <Image
               src={product.images.edges[0].node.src}
               width={600}
@@ -369,6 +371,7 @@ const LandingPage = () => {
               alt="photo"
               className="h-full w-full ml-4 object-cover object-center cursor-pointer lg:w-[300px] lg:h-[300px] md:w-[100px] md:h-[100px]"              // onClick={() => handleSmallImageClick(image)}
             />
+            </Zoom>
           </div>
           </>  
           ))
