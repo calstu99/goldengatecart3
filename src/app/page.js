@@ -8,9 +8,6 @@ import ProductList from '../app/data/products3';
 import LandingPage from './data/products7';
 
 
-
-
-
 const Home = () => {
   return (
     <>
