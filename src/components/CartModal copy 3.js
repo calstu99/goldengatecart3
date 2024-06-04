@@ -20,11 +20,6 @@ const CartModal = () => {
   const [purchaseUnits, setPurchaseUnits] = useState([]);
   const [paypalButtonKey, setPaypalButtonKey] = useState(0);
 
-  // Coupon Code
-  const [couponCode, setCouponCode] = useState('');
-  const [discountAmount, setDiscountAmount] = useState(0);
-  const [couponCodeStatus, setCouponCodeStatus] = useState('');
-
   const paypalRef = useRef();
   const router = useRouter();
   const addPaypalScript = () => {
@@ -43,33 +38,6 @@ const CartModal = () => {
       document.body.appendChild(script);
     });
   }; 
-
-
-
-  // function to apply the coupon code and calculate the discount:
-  // Environment Variable Prefix: For environment variables to be accessible in the browser (client-side code), they must be prefixed with NEXT_PUBLIC_. This is a requirement in Next.js to differentiate between server-side and client-side environment variables.
-  
-  // useEffect(() => {
-  //   if (couponCode !== '') {
-  //     applyCouponCode();
-  //   }
-  // }, [couponCodeStatus]);
-  
-  
-  const applyCouponCode = () => {
-    const discountCode = process.env.NEXT_PUBLIC_DISCOUNT_CODE;
-    console.log('discount code',discountCode);
-    const discountAmount = parseFloat(process.env.NEXT_PUBLIC_DISCOUNT_AMOUNT);
-    console.log("couponcode entered",couponCode);
-    if (couponCode.toUpperCase() === discountCode) {
-      const discount = totalAmount * discountAmount; // 10% discount
-      setDiscountAmount(discount);
-      setCouponCodeStatus('valid');
-    } else {
-      setDiscountAmount(0);
-      setCouponCodeStatus('invalid');
-    }
-  };
 
   const updatePurchaseUnits = useCallback(() => {
     setPurchaseUnits([
@@ -112,13 +80,10 @@ const CartModal = () => {
     router.push(`${process.env.NEXT_PUBLIC_BASE_API_URL}/success`);
   };
 
-  // const totalAmount = cart.reduce(
-  //   (total, product) => total + product.price * product.quantity,
-  //   0
-  // );
-  // Update the totalAmount calculation to include the discount:
-  const totalAmount = (cart.reduce((total, product) => total + product.price * product.quantity, 0) - discountAmount).toFixed(2);
-  // const totalAmount = cart.reduce((total, product) => total + product.price * product.quantity, 0) - discountAmount.toFixed(2);
+  const totalAmount = cart.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
 
   const totalQuantity = cart.reduce(
     (total, product) => total + product.quantity,
@@ -323,38 +288,6 @@ const CartModal = () => {
             {`Subtotal: $${totalAmount.toFixed(2)}`}
           </p>
           </div> */}
-
-      {/* input field and a button to enter and apply the coupon code: */}
-      <div className="flex items-center mb-4">
-        <input
-          type="text"
-          placeholder="Enter coupon code"
-          value={couponCode}
-          onChange={(e) => setCouponCode(e.target.value)}
-          className={`flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${couponCodeStatus === 'valid' ? 'blur' : ''}`}
-          disabled={couponCodeStatus === 'valid'}
-        />
-        {/* <button
-          onClick={applyCouponCode}
-          className={`px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${couponCodeStatus === 'valid' ? 'blur ' : ''}`}
-
-          // className="px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        >
-          Apply
-        </button> */}
-            {couponCodeStatus !== 'valid' && (
-              <button
-                onClick={applyCouponCode}
-                className="px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                Apply
-              </button>
-            )}
-      </div>
-      <p className={`text-sm ${couponCodeStatus === 'valid' ? 'text-green-500' : 'text-red-500'}`}>
-        {couponCodeStatus === 'valid' ? 'Discount applied' : couponCodeStatus === 'invalid' ? 'Incorrect coupon code' : ''}
-      </p>
-          
 
           {cart.length > 0 ? (
             <div className="fixed bottom-0 right-0 bg-white p-4 w-full sm:w-auto sm:mr-4">

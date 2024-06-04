@@ -260,19 +260,20 @@ const LandingPage = () => {
         </div> */}
 
 
-<div className="mx-auto container flex justify-center items-center py-12 px-4 sm:px-6 2xl:px-0">
+<div className="mx-auto container flex justify-center items-center bg-stone-800 py-12 px-4 sm:px-6 2xl:px-0">
   {/*- more free and premium Tailwind CSS components at https://tailwinduikit.com/ -*/}
-  <div className="flex flex-col lg:flex-row justify-center items-center space-y-6 lg:space-y-0">
+  
+  <div className="flex flex-col  lg:flex-row justify-center items-center space-y-6 lg:space-y-0">
     
     
     <div className="w-80 sm:w-auto flex flex-col justify-start items-start">
       <div>
-        <p className="text-3xl xl:text-4xl font-semibold leading-9 text-gray-800 dark:text-white">
-          Our Best Sellers
+        <p className="text-3xl xl:text-4xl font-semibold leading-9 text-white dark:text-white">
+          Shop Best-Sellers
         </p>
       </div>
       <div className="mt-4 lg:w-4/5 xl:w-3/5">
-        <p className="text-base leading-6 text-gray-600 dark:text-white">
+        <p className="text-base leading-6 text-white ">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout.
         </p>
@@ -280,11 +281,11 @@ const LandingPage = () => {
      
               <Link
                 href="/specials?collectionHandles=best-sellers"
-                className="ml-2 w-full"
+                className=" w-full"
               >
                 <div className="mt-16 w-full">
-                  <button className="px-4 bg-gray-900 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200  flex justify-between items-center w-full lg:w-72 h-14 text-white hover:bg-gray-700 focus:ring-2 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 dark:hover:bg-gray-100">
-                    <p className="text-xl font-medium leading-5 ">See More</p>
+                  <button className="px-4 bg-white dark:bg-white flex justify-between items-center w-full lg:w-72 h-14 text-grey-900 hover:bg-slate-100 focus:ring-2 outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 ">
+                    <p className="text-xl text-grey-900 font-medium leading-5 ">SHOP NOW</p>
                     <svg
                       className="dark:text-gray-900"
                       width={32}
@@ -320,64 +321,23 @@ const LandingPage = () => {
               </Link>  
        
     </div>
-    <div className="flex flex-col sm:flex-row jusitfy-center items-center sm:space-x-5 xl:space-x-8 space-y-4 sm:space-y-0">
-      {/* <div className="">
-        <img
-          className="hidden lg:block"
-          src="https://ggcart.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0574%2F8781%2F8836%2Ffiles%2Fknife3.webp%3Fv%3D1717039957&w=640&q=7"
-          alt="sofa"
-        />
-        <img
-          className="w-80 sm:w-auto lg:hidden"
-          src="https://ggcart.vercel.app/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0574%2F8781%2F8836%2Ffiles%2Fknife3.webp%3Fv%3D1717039957&w=640&q=7"
-          alt="sofa"
-        />
-      </div>
-      <div className="flex flex-col justify-center items-center space-y-4 sm:space-y-0 sm:space-y-5 lg:space-y-5 xl:space-y-8">
-        <div>
-          <img
-            className="hidden lg:block"
-            src="http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0574%2F8781%2F8836%2Ffiles%2Fdress4.webp%3Fv%3D1714838712&w=640&q=75g"
-            alt="chairs"
-          />
-          <img
-            className="w-80 sm:w-auto lg:hidden"
-            src="http://localhost:3000/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0574%2F8781%2F8836%2Ffiles%2Fdress4.webp%3Fv%3D1714838712&w=640&q=75g"
-            alt="chairs"
-          />
-        </div>
-        <div>
-          <img
-            className="hidden lg:block"
-            src="https://cdn.shopify.com/s/files/1/0574/8781/8836/files/b281325b-7cd4-421d-a2cc-20efcccc7d88.webp?v=1716148156"
-            alt="chairs"
-          />
-          <img
-            className="w-80 sm:w-auto lg:hidden"
-            src="https://cdn.shopify.com/s/files/1/0574/8781/8836/files/b281325b-7cd4-421d-a2cc-20efcccc7d88.webp?v=1716148156"
-            alt="chairs"
-          />
-        </div>
-      </div> */}
-      {
-           bestSellerProducts.map((product,idx) => (
-            <>
-          <div key = {idx} className="overflow-hidden rounded-lg bg-gray-100">
+    <div className="flex flex-col sm:flex-row justify-center items-center sm:space-x-5 xl:space-x-8 space-y-4 sm:space-y-0">
+        {bestSellerProducts.map((product, idx) => (
+          <div key={idx} className="overflow-hidden rounded-lg bg-gray-100">
             <Zoom>
-            <Image
-              src={product.images.edges[0].node.src}
-              width={600}
-              height={600}
-              alt="photo"
-              className="h-full w-full ml-4 object-cover object-center cursor-pointer lg:w-[300px] lg:h-[300px] md:w-[100px] md:h-[100px]"              // onClick={() => handleSmallImageClick(image)}
-            />
+              <Image
+                src={product.images.edges[0].node.src}
+                width={600}
+                height={600}
+                alt="photo"
+                className="h-full w-full object-cover object-center cursor-pointer lg:w-[300px] lg:h-[300px] md:w-[100px] md:h-[100px]"
+              />
             </Zoom>
           </div>
-          </>  
-          ))
-        }
-   
-    </div>
+        ))}
+      </div>
+  
+  
   </div>
 </div>
 
