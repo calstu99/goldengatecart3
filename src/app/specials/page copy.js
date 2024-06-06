@@ -5,12 +5,9 @@ import { createStorefrontApiClient } from '@shopify/storefront-api-client';
 import { useCart } from "../../components/CartContext";
 import ProductCard from '../../components/ProductCard';
 import ProductVariants from '../../components/ProductVariants';
-import {getAllProductsQuery} from '@/app/utils/ShopifyQuery';
-import {link_descriptions} from '@/app/utils/constants';
 
 import {useSession } from "next-auth/react";
 
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
 // (Storefront API client configuration and GraphQL query)
 
@@ -20,6 +17,78 @@ const client = createStorefrontApiClient({
   publicAccessToken: process.env.NEXT_PUBLIC_SHOPIFY_PUBLIC_ACCESS_TOKEN,
 });
 
+// GraphQL query to Shopify
+const getAllProductsQuery = `
+query getAllProducts($first: Int, $after: String) {
+  products(first: $first, after: $after) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        title
+        handle
+        description
+        tags
+        priceRange {
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        totalInventory
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              title
+              sku
+              availableForSale
+              price {
+                amount
+                currencyCode
+              }
+              compareAtPrice {
+                amount
+                currencyCode
+              }
+              quantityAvailable
+              image {
+                src
+                altText
+              }
+            }
+          }
+        }
+        images(first: 5) {
+          edges {
+            node {
+              src
+              altText
+            }
+          }
+        }
+        collections(first: 10) {
+          edges {
+            node {
+              id
+              title
+              handle
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
 const LandingPage = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,16 +97,8 @@ const LandingPage = () => {
   const { addToCart, cart } = useCart();
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [description, setDescription] = useState('Select from our best products');
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const { data: session } = useSession();
- 
-
-  
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -45,49 +106,25 @@ const LandingPage = () => {
         let cursor = null;
         let allProducts = [];
 
-        // Access router properties and methods
-        // console.log(router.asPath); // Current URL
+        // Check for collectionHandles query parameter in the URL
 
-        // Access pathname
-        // console.log('pathname',pathname); // e.g., '/products'
+        //URLSearchParams must be in the useEffects for it to work NextJS13+
+        const urlParams = new URLSearchParams(window.location.search);
+        // console.log ('urlParms',urlParams);
+        const collectionHandlesFromURL = urlParams.get('collectionHandles');
 
-        // Access search params
-        // console.log('search params:',searchParams.get('collectionHandles')); // Get the value of the 'search' query param
-
-        /*
-        // To extract the "knives" value from the query parameter "collectionHandles" in the
-         URL "http://localhost:3000/specials?collectionHandles=knives" using the next/navigation
-          package in Next.js 13, you can use the useSearchParams hook.
+        console.log('urlParams',urlParams);
+        console.log('collectionHandles',collectionHandlesFromURL);
         
-        */
-        const collectionHandlesFromURL = searchParams.getAll('collectionHandles');
-
-        // console.log('urlParams',urlParams);
-        console.log('collectionHandles', collectionHandlesFromURL);
-
-        
-
-
-        // const collectionHandlesToFetch = collectionHandlesFromURL
-        //   ? collectionHandlesFromURL
-        //   : process.env.NEXT_PUBLIC_COLLECTION_HANDLES_TO_FETCH.split(',');
-
-        // Convert collectionHandlesFromURL to a string
+        // If collectionHandles is provided in the URL, use it instead of the environment variable
         const collectionHandlesToFetch = collectionHandlesFromURL
-          ? (collectionHandlesFromURL.toString() || '').split(',')
+          ? collectionHandlesFromURL.split(',')
           : process.env.NEXT_PUBLIC_COLLECTION_HANDLES_TO_FETCH.split(',');
-
-
-         // Find the description based on the collection handles
-        const matchingDescription = collectionHandlesToFetch.find(
-          (handle) => link_descriptions[handle]
-        );
-        setDescription(matchingDescription ? link_descriptions[matchingDescription] : 'Select from our best products');
 
 
         while (true) {
           const { data, errors } = await client.request(getAllProductsQuery, {
-            variables: { first: 250, after: cursor },
+            variables: { first: 250, after: cursor  },
           });
 
           if (errors) {
@@ -100,15 +137,15 @@ const LandingPage = () => {
           // allProducts = [...allProducts, ...products.edges.map((edge) => edge.node)];
 
           const filteredProducts = products.edges
-            .map((edge) => edge.node)
-            .filter((product) =>
-              product.collections.edges.some(
-                (edge) =>
-                  collectionHandlesToFetch.includes(edge.node.handle.toLowerCase())
-              )
-            );
-
-          allProducts = [...allProducts, ...filteredProducts];
+          .map((edge) => edge.node)
+          .filter((product) =>
+            product.collections.edges.some(
+              (edge) =>
+                collectionHandlesToFetch.includes(edge.node.handle.toLowerCase())
+            )
+          );
+  
+        allProducts = [...allProducts, ...filteredProducts];
 
           if (!products.pageInfo.hasNextPage) {
             break;
@@ -120,6 +157,8 @@ const LandingPage = () => {
         setProducts(allProducts);
         console.log('allProducts', allProducts);
 
+   
+
       } catch (error) {
         setError(error);
       } finally {
@@ -127,18 +166,22 @@ const LandingPage = () => {
       }
 
     };
-
+    // Fetch products every 300 seconds
+    // const interval = setInterval(fetchAllProducts, 30000); // Update every 30 seconds
+    // return () => clearInterval(interval); // Clean up the interval on component unmount
     fetchAllProducts();
+       // handleSearch();
+      // Run handleSearch after 1 second
+    //   setTimeout(() => {
+    //     handleSearch();
+    //   }, 1000);
+   
+  }, []);
 
-
-  }, [searchParams]);
-
-
+ 
   const showVariants = (product) => {
     setSelectedProduct(product);
   };
-
-  
 
   const handleSearch = () => {
     const filtered = products.filter(
@@ -149,6 +192,7 @@ const LandingPage = () => {
     );
     setFilteredProducts(filtered);
   };
+
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -166,18 +210,16 @@ const LandingPage = () => {
       <section className="px-2 py-2 bg-white md:px-0">
         <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
           <div className="flex flex-wrap items-center sm:-mx-3">
-
-            <div className="w-full md:w-2/3 md:px-3">
+            <div className="w-full md:w-1/2 md:px-3">
               <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-xl md:text-3xl lg:text-3xl xl:text-4xl">
-                  <span className="block xl:inline">Shop with Us </span>
+                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+                  <span className="block xl:inline">Best Products </span>
                   <span className="block text-primary xl:inline">
                     Order Now!
                   </span>
                 </h1>
                 <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
-                  {/* It's never been easier to get the best value for you money. One stop shop. */}
-                 {description}
+                  It's never been easier to get the best value for you money. One stop shop.
                 </p>
                 <div>
                   {/* {!session && <h1>Login for our discounts!</h1>} */}
@@ -205,19 +247,10 @@ const LandingPage = () => {
 
               </div>
             </div>
-            <div className="w-full md:w-1/3">
-              {/* <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+            <div className="w-full md:w-1/2">
+              <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
                 <img src="https://images.unsplash.com/photo-1498049860654-af1a5c566876?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=8" />
-              </div> */}
-
-<div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-  <img
-    // src="https://images.pexels.com/photos/6238368/pexels-photo-6238368.jpeg?auto=compress"
-    src="https://images.pexels.com/photos/935760/pexels-photo-935760.jpeg?auto=compress"
-    alt="Image Description"
-    className="w-[100%] mx-auto"
-  />
-</div>
+              </div>
             </div>
           </div>
         </div>

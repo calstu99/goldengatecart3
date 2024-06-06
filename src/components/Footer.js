@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const Footer = () => {
   return (
-<footer className="bg-white dark:bg-gray-900">
+<footer className="bg-slate-200 dark:bg-gray-900 border-t border-gray-300">
   <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
     <div className="md:flex md:justify-between">
       <div className="mb-6 md:mb-0">
@@ -14,10 +14,10 @@ const Footer = () => {
         <Image
             src={logo}
             alt="Logo"
-            width={50}
-            height={50}
+            width={25}
+            height={25}
           />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className=" ml-4 self-center text-lg font-semibold whitespace-nowrap dark:text-white">
             GoldenGate Cart
           </span>
         </a>
@@ -26,10 +26,10 @@ const Footer = () => {
       
       <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
         <div>
-          <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+          <h2 className="mb-6 text-xs font-semibold text-gray-900 uppercase dark:text-white">
             Resources
           </h2>
-          <ul className="text-gray-500 dark:text-gray-400 font-medium">
+          <ul className="text-gray-500 dark:text-gray-400 text-xs font-medium">
             <li className="mb-4">
               <a href="/" className="hover:underline">
                 Flowbite
@@ -43,10 +43,10 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+          <h2 className="mb-6 text-xs font-semibold text-gray-900 uppercase dark:text-white">
             Follow us
           </h2>
-          <ul className="text-gray-500 dark:text-gray-400 font-medium">
+          <ul className="text-gray-500 dark:text-gray-400 text-xs font-medium">
             <li className="mb-4">
               <a
                 href="/"
@@ -66,10 +66,10 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+          <h2 className="mb-6 text-xs font-semibold text-gray-900 uppercase dark:text-white">
             Legal
           </h2>
-          <ul className="text-gray-500 dark:text-gray-400 font-medium">
+          <ul className="text-gray-500 dark:text-gray-400 text-xs font-medium">
             <li className="mb-4">
               <a href="#" className="hover:underline">
                 Privacy Policy

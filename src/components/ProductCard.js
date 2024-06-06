@@ -9,7 +9,7 @@ const ProductCard = ({ product, onShowVariants, onAddToCart, selectedProduct,onC
         <img
           src={product.images.edges[0].node.src}
           alt={product.images.edges[0].node.altText}
-          className="h-64 w-full object-cover"
+          className="h-64 w-full object-contain"
           style={{ padding: '1rem' }}
           onClick={() => onShowVariants(product)} // Added onClick event here
         />

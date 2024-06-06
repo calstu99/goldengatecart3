@@ -10,6 +10,9 @@ import Link from "next/link";
 import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom'
 
+import {landingPageText} from '@/app/utils/constants';
+import {getAllProductsQuery} from '@/app/utils/ShopifyQuery';
+
 
 // (Storefront API client configuration and GraphQL query)
 
@@ -42,76 +45,76 @@ const collectionHandlesToFetch = process.env.NEXT_PUBLIC_COLLECTION_HANDLES_TO_F
 
 
 // GraphQL query to Shopify
-const getAllProductsQuery = `
-query getAllProducts($first: Int, $after: String) {
-  products(first: $first, after: $after) {
-    pageInfo {
-      hasNextPage
-      endCursor
-    }
-    edges {
-      node {
-        id
-        title
-        handle
-        description
-        tags
-        priceRange {
-          minVariantPrice {
-            amount
-            currencyCode
-          }
-          maxVariantPrice {
-            amount
-            currencyCode
-          }
-        }
-        totalInventory
-        variants(first: 10) {
-          edges {
-            node {
-              id
-              title
-              sku
-              availableForSale
-              price {
-                amount
-                currencyCode
-              }
-              compareAtPrice {
-                amount
-                currencyCode
-              }
-              quantityAvailable
-              image {
-                src
-                altText
-              }
-            }
-          }
-        }
-        images(first: 5) {
-          edges {
-            node {
-              src
-              altText
-            }
-          }
-        }
-        collections(first: 10) {
-          edges {
-            node {
-              id
-              title
-              handle
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`;
+// const getAllProductsQuery = `
+// query getAllProducts($first: Int, $after: String) {
+//   products(first: $first, after: $after) {
+//     pageInfo {
+//       hasNextPage
+//       endCursor
+//     }
+//     edges {
+//       node {
+//         id
+//         title
+//         handle
+//         description
+//         tags
+//         priceRange {
+//           minVariantPrice {
+//             amount
+//             currencyCode
+//           }
+//           maxVariantPrice {
+//             amount
+//             currencyCode
+//           }
+//         }
+//         totalInventory
+//         variants(first: 10) {
+//           edges {
+//             node {
+//               id
+//               title
+//               sku
+//               availableForSale
+//               price {
+//                 amount
+//                 currencyCode
+//               }
+//               compareAtPrice {
+//                 amount
+//                 currencyCode
+//               }
+//               quantityAvailable
+//               image {
+//                 src
+//                 altText
+//               }
+//             }
+//           }
+//         }
+//         images(first: 5) {
+//           edges {
+//             node {
+//               src
+//               altText
+//             }
+//           }
+//         }
+//         collections(first: 10) {
+//           edges {
+//             node {
+//               id
+//               title
+//               handle
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// `;
 
 
 const LandingPage = () => {
@@ -268,14 +271,16 @@ const LandingPage = () => {
     
     <div className="w-80 sm:w-auto flex flex-col justify-start items-start">
       <div>
-        <p className="text-3xl xl:text-4xl font-semibold leading-9 text-white dark:text-white">
+        <p className="text-3xl xl:text-4xl mr-4 font-semibold leading-9 text-white dark:text-white">
           Shop Best-Sellers
         </p>
       </div>
       <div className="mt-4 lg:w-4/5 xl:w-3/5">
-        <p className="text-base leading-6 text-white ">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout.
+      <p className="text-sm leading-6 text-white uppercase">
+         {landingPageText.MainText}
+        </p>
+        <p className="text-sm leading-6 text-white uppercase">
+         {landingPageText.holidayText}
         </p>
       </div>
      

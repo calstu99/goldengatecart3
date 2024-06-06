@@ -11,10 +11,10 @@ import LandingPage from './data/products7';
 const Home = () => {
   return (
     <>
+    <div className='bg-slate-50'>
     <Hero/>
-    {/* <Newest/>  */}
-    {/* <ProductList/> */}
     <LandingPage/>
+    </div>
     </>
    )
 }

@@ -331,7 +331,7 @@ const CartModal = () => {
           placeholder="Enter coupon code"
           value={couponCode}
           onChange={(e) => setCouponCode(e.target.value)}
-          className={`flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500 ${couponCodeStatus === 'valid' ? 'blur' : ''}`}
+          className={`flex-1 px-4 py-2 ml-2 mr-10 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-slate-200 ${couponCodeStatus === 'valid' ? 'blur' : ''}`}
           disabled={couponCodeStatus === 'valid'}
         />
         {/* <button
