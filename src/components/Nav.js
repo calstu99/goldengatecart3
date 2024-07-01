@@ -89,8 +89,8 @@ const Nav = () => {
       <header className={`${isSticky ? 'sticky' : ''} mb-8 border-b`}>
         <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
           <Link href="/">
-          <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>True
-          <span className="text-nav-text-800">Rosa</span>
+          <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>Tru
+          <span className="text-nav-text-800">rosa</span>
           </h1>
           {/* <h1 className="text-lg md:text-xl font-bold">
               True<span className="text-primary">Rosa</span>
