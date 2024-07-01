@@ -9,7 +9,7 @@ const ProductCard = ({ product, onShowVariants, onAddToCart, selectedProduct,onC
         <img
           src={product.images.edges[0].node.src}
           alt={product.images.edges[0].node.altText}
-          className="h-64 w-full object-contain"
+          className="h-80 w-full bg-white object-contain"
           style={{ padding: '1rem' }}
           onClick={() => onShowVariants(product)} // Added onClick event here
         />
@@ -27,7 +27,7 @@ const ProductCard = ({ product, onShowVariants, onAddToCart, selectedProduct,onC
           <div className="flex space-x-2">
             <button
               onClick={() => onShowVariants(product)}
-              className="bg-green-500 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded text-sm ml-2"
+              className="bg-green-500 hover:bg-gray-600 text-white font-medium py-1 px-2 rounded text-sm ml-2"
             >
              {/* {product.variants.edges.length} item */}
              <div className='text-xs'>

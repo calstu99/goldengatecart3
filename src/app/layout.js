@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter} from 'next/font/google'
 import "./globals.css";
 import "@/app/custom.css";
 import Nav from '@/components/Nav';
@@ -13,6 +13,7 @@ import { getServerSession } from "next-auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
+
 export const metadata = {
   title: "Golden Gate Cart",
   description: "Powering Top Fashion for a top price",
@@ -23,6 +24,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       {/* <body className={inter.className}> */}
+      
       <body className={inter.className}>
       <SessionProvider session={session}>
         <CartProvider>

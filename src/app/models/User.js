@@ -12,7 +12,7 @@ const addressSchema = new Schema({
 
 const userSchema = new Schema(
   {
-    email: {
+      email: {
       type: String,
       unique: true,
       required: true,
@@ -33,6 +33,8 @@ const userSchema = new Schema(
       type: String,
       
     },
+    tier:{type:String},
+    
     addresses: [addressSchema],
   },
   { timestamps: true }

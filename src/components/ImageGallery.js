@@ -1,46 +1,70 @@
-"use client";
-import React, { useState } from 'react';
+import Image from 'next/image';
+import React, { useEffect, useRef, useState } from 'react';
+import Zoom from 'react-medium-image-zoom'
 
-const Gallery = ({ images }) => {
-  const [selectedImage, setSelectedImage] = useState(null);
+export default function ImageGallery({ images }) {
+  const [bigImage, setBigImage] = React.useState(images[0]);
+  const currentIndex = useRef(0);
 
-  const handleImageClick = (image) => {
-    setSelectedImage(image);
+  const handleSmallImageClick = (image) => {
+    setBigImage(image);
+    currentIndex.current = images.indexOf(image);
   };
 
-  const handleCloseModal = () => {
-    setSelectedImage(null);
+  const handleKeyDown = (event) => {
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      let nextIndex;
+      if (event.key === 'ArrowUp') {
+        nextIndex = currentIndex.current === 0 ? images.length - 1 : currentIndex.current - 1;
+      } else {
+        nextIndex = currentIndex.current === images.length - 1 ? 0 : currentIndex.current + 1;
+      }
+      setBigImage(images[nextIndex]);
+      currentIndex.current = nextIndex;
+    }
   };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   return (
-    <div>
-      <div className="grid grid-cols-3 gap-4">
-        {Object.values(images).map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`Image ${index + 1}`}
-            onClick={() => handleImageClick(image)}
-            className="w-full h-64 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity duration-300"
-          />
+    <div className="grid gap-4 lg:grid-cols-5">
+      <div className="order-last flex gap-4 lg:order-none lg:flex-col">
+        {images.map((image, idx) => (
+          <div key={idx} className="overflow-hidden rounded-lg bg-gray-100">
+            <Image
+              src={image.node.src}
+              width={200}
+              height={200}
+              alt="photo"
+              className="h-full w-full object-cover object-center cursor-pointer"
+              onClick={() => handleSmallImageClick(image)}
+            />
+          </div>
         ))}
       </div>
 
-      {selectedImage && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg relative">
-            <span
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 cursor-pointer"
-              onClick={handleCloseModal}
-            >
-              &times;
-            </span>
-            <img src={selectedImage} alt="Selected" className="max-h-[80vh] object-contain" />
-          </div>
-        </div>
-      )}
+      <div className="relative overflow-hidden rounded-lg bg-white-100 lg:col-span-4 ">
+        <Zoom>
+        <Image
+          src={bigImage.node.src}
+          alt="Photo"
+          width={500}
+          height={500}
+          className="h-auto w-full object-contain" // Change object-cover to object-contain
+        />
+        </Zoom>
+
+        {/* <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm md:text-xs uppercase tracking-wider text-white">
+          Sale
+        </span> */}
+      </div>
     </div>
   );
-};
+}
 
-export default Gallery;
+// https://github.com/ski043/nextjs-commerce-tutorial/blob/main/app/components/ImageGallery.tsx

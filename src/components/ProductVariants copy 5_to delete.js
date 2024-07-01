@@ -15,7 +15,7 @@ import { Star,Truck,Minimize2 } from 'lucide-react';
 
 import Rating from './Rating'; 
 
-import ImageGallery from  '@/components/ImageGallery_new';
+import ImageGallery from  '@/components/ImageGallery';
 
 import {useSession } from "next-auth/react";
 

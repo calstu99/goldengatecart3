@@ -7,11 +7,17 @@ import { useCart } from "./CartContext";
 import  { useState, useEffect } from 'react';
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
 
+import { Dancing_Script } from 'next/font/google';
+import requireAuth from "@/app/utils/requireAuth";
+
+
+
 import { signOut, useSession } from "next-auth/react";
 
 import Image from 'next/image';
 // import logo from '../../public/next.svg';
-import logo from '../components/logo.svg';
+// import logo from '../components/logo.svg';
+import logo from '../../public/images/logo.png';
 
 import { Button } from './ui/button';
 import {ShoppingBag, ShoppingCart, Menu, Minimize2, User} from 'lucide-react';
@@ -32,6 +38,10 @@ import {
 //     { name: "Teens", href: "/Teens" },
 //   ];
 
+const dancingScript = Dancing_Script({ subsets: ['latin'], weight: '700' });
+
+
+
 const Nav = () => {
     const pathname = usePathname();
     const {cart, openCart} = useCart();
@@ -41,6 +51,8 @@ const Nav = () => {
 
     const { data: session } = useSession();
     console.log('session',session);
+
+    const isAuthorized = requireAuth(true); // Pass true for adminOnly
 
     useEffect(() => {
       const handleScroll = () => {
@@ -77,24 +89,28 @@ const Nav = () => {
       <header className={`${isSticky ? 'sticky' : ''} mb-8 border-b`}>
         <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
           <Link href="/">
-            <h1 className="text-lg md:text-xl font-bold">
-              GoldenGate<span className="text-primary">Cart </span>
-            </h1>
+          <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>True
+          <span className="text-nav-text-800">Rosa</span>
+          </h1>
+          {/* <h1 className="text-lg md:text-xl font-bold">
+              True<span className="text-primary">Rosa</span>
+            </h1> */}
           </Link>
           <Image
             src={logo}
             alt="Logo"
-            width={25}
-            height={25}
+            width={75}
+            height={75}
             className='ml-4'
       
           />
+          
           <nav className="hidden gap-12 lg:flex 2xl:ml-16 px-8">
             {links.map((link, idx) => (
               <div key={idx}>
-                {pathname === link.href ? (
+               {pathname === link.href ? (
                   <Link
-                    className="text-lg font-semibold text-primary"
+                    className="text-lg font-semibold text-nav-text-800"
                     href={link.href}
                   >
                    <span className="text-sm font-semibold">{link.name}</span>
@@ -102,13 +118,43 @@ const Nav = () => {
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-primary"
+                    className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-nav-text-300"
                   >
                     <span className="text-sm font-semibold">{link.name}</span>
                   </Link>
                 )}
               </div>
             ))}
+
+             {/*  Object.values(links) instead of just links. This converts the object into an array of its values, which you can then map over. */}
+                 
+                  {/* {Object.values(links).map((link, idx) => (
+                    <div key={idx}>
+                      {pathname === link.href ? (
+                        <Link
+                          className="text-lg font-semibold text-primary"
+                          href={link.href}
+                        >
+                          <span className="text-sm font-semibold">{link.name}</span>
+                        </Link>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-primary"
+                        >
+                          <span className="text-sm font-semibold">{link.name}</span>
+                        </Link>
+                      )}
+                    </div>
+                  ))} */}
+            
+            {
+              isAuthorized &&
+              (<Link href="/admin/orders/update/master">
+                <span className="text-sm font-semibold">Admin </span>
+              </Link>)
+            }
+           
           </nav>
           {/* https://tailwindcss.com/docs/divide-color*/}
           <div className="flex sm:border-1 border-solid border-gray-100 mx-10">
@@ -284,9 +330,12 @@ const Nav = () => {
                   alt="star logo mobile"
                 /> */}
                 <div className="flex items-center justify-center mt-10">
-                  <p className="text-xl md:text-2xl font-bold mr-2">
+                  {/* <p className="text-xl md:text-2xl font-bold mr-2">
                     Golden Gate<span className="text-primary">Cart</span>
-                  </p>
+                  </p> */}
+                  <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>True
+                    <span className="text-primary">Rosa</span>
+                  </h1>
                   <Image
                     src={logo}
                     alt="Logo"

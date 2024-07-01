@@ -128,7 +128,7 @@ const CartModal = () => {
 
   const handleDecrement = (productId) => {
     decrementQuantity(productId);
-    setPaypalButtonKey(paypalButtonKey + 1);
+   // setPaypalButtonKey(paypalButtonKey + 1);
 
     const product = cart.find((item) => item.id === productId);
     if (product && product.quantity === 0) {
@@ -138,7 +138,7 @@ const CartModal = () => {
 
   const handleIncrement = (productId) => {
     incrementQuantity(productId);
-    setPaypalButtonKey(paypalButtonKey + 1);
+    //setPaypalButtonKey(paypalButtonKey + 1);
   };
 
   const checkout = async () => {
@@ -259,6 +259,7 @@ const CartModal = () => {
                   </div>
             </>
           )}
+
         </div>
         <div>
           <ul>
@@ -324,37 +325,43 @@ const CartModal = () => {
           </p>
           </div> */}
 
-      {/* input field and a button to enter and apply the coupon code: */}
-      <div className="flex items-center mb-4">
-        <input
-          type="text"
-          placeholder="Enter coupon code"
-          value={couponCode}
-          onChange={(e) => setCouponCode(e.target.value)}
-          className={`flex-1 px-4 py-2 ml-2 mr-10 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-slate-200 ${couponCodeStatus === 'valid' ? 'blur' : ''}`}
-          disabled={couponCodeStatus === 'valid'}
-        />
-        {/* <button
-          onClick={applyCouponCode}
-          className={`px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${couponCodeStatus === 'valid' ? 'blur ' : ''}`}
 
-          // className="px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        >
-          Apply
-        </button> */}
-            {couponCodeStatus !== 'valid' && (
-              <button
-                onClick={applyCouponCode}
-                className="px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                Apply
-              </button>
-            )}
-      </div>
-      <p className={`text-sm ${couponCodeStatus === 'valid' ? 'text-green-500' : 'text-red-500'}`}>
-        {couponCodeStatus === 'valid' ? 'Discount applied' : couponCodeStatus === 'invalid' ? 'Incorrect coupon code' : ''}
-      </p>
-          
+{cart.length > 0 ? (
+         <>
+        <div className="flex items-center mb-4 mt-8">
+         <input
+           type="text"
+           placeholder="Enter coupon code"
+           value={couponCode}
+           onChange={(e) => setCouponCode(e.target.value)}
+           className={`flex-1 px-4 py-2 ml-2 mr-10 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-slate-200 ${couponCodeStatus === 'valid' ? 'blur' : ''}`}
+           disabled={couponCodeStatus === 'valid'}
+         />
+         {/* <button
+           onClick={applyCouponCode}
+           className={`px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 ${couponCodeStatus === 'valid' ? 'blur ' : ''}`}
+ 
+           // className="px-4 py-2 bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+         >
+           Apply
+         </button> */}
+             {couponCodeStatus !== 'valid' && (
+               <button
+                 onClick={applyCouponCode}
+                 className="px-3 py-1.5 text-sm bg-indigo-500 text-white rounded-r-md hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+               >
+                 Apply
+               </button>
+             )}
+       </div>
+       <p className={`text-sm ${couponCodeStatus === 'valid' ? 'text-green-500' : 'text-red-500'}`}>
+         {couponCodeStatus === 'valid' ? 'Discount code applied' : couponCodeStatus === 'invalid' ? 'Incorrect coupon code' : ''}
+       </p>
+
+       </>
+          ) : <div></div>
+          }
+         
 
           {cart.length > 0 ? (
             <div className="fixed bottom-0 right-0 bg-white p-4 w-full sm:w-auto sm:mr-4">

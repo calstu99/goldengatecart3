@@ -17,6 +17,7 @@ module.exports = {
       },
     },
     extend: {
+      // Add your global colors here
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,6 +52,40 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        'nav-color': '#e3342f',
+        // text-nav-color or bg-text-nav-color  (use)
+        'nav-text':{
+          // https://htmlcolorcodes.com/colors/shades-of-pink/
+          100: '#ff00ff',
+          200: '#ff10f0',
+          300: '#aa336a',
+          400: '#dc143c',
+          500: '#de3163',
+          600: '#9f2b68',
+          700: '#718096',
+          800: '#e37383',
+          900: '#da70d6',
+          // text-nav-text-100 or bg-nav-text-100(use)   
+        },
+        'hero-text':{
+          // https://htmlcolorcodes.com/colors/shades-of-pink/
+          100: '#673147',
+          200: '#a95c68',
+          300: '#800080',
+          400: '#953553',
+          500: '#d8bfd98',
+          // text-hero-text-100 or bg-hero-text-100(use)   
+        },
+        'special-text':{
+          // https://htmlcolorcodes.com/colors/shades-of-pink/
+          100: '#673147',
+          200: '#a95c68',
+          300: '#800080',
+          400: '#953553',
+          500: '#d8bfd98',
+          // text-hero-text-100 or bg-hero-text-100(use)   
+        },
+             
       },
       borderRadius: {
         lg: "var(--radius)",

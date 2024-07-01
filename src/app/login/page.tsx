@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle} from "react-icons/fc";
+import { FaXTwitter } from "react-icons/fa6";
 import Image from "next/image";
 import toast from "react-hot-toast";
 
 import logo from "../../components/logo.svg";
+
 
 const NextLoginPage = () => {
   const router = useRouter();
@@ -24,6 +26,31 @@ const NextLoginPage = () => {
   const isValidEmail = (email: string) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
+  };
+
+  const sendEmail = async() =>{
+    const to = 'haenergycapital@gmail.com';
+    const subject = 'Hello from Next.js';
+    const text = 'This is a test email sent from Next.js';
+  
+    try {
+      const response = await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ to, subject, text }),
+      });
+  
+      if (response.ok) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+
   };
 
   const handleSubmit = async (e: any) => {
@@ -56,6 +83,10 @@ const NextLoginPage = () => {
     } else {
       setError("");
       toast.success("Successful login");
+
+      // sendEmail(); -- move this to register
+
+
     }
   };
 
@@ -66,10 +97,13 @@ const NextLoginPage = () => {
     sessionStatus !== "authenticated" && (
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="flex justify-center flex-col items-center">
-          <Image src= {logo} alt="star logo" width={50} height={50} />
+          <Image src= {logo} alt="star logo" width={35} height={35} />
           <h2 className="mt-6 text-center text-2xl leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Login
           </h2>
+          <p className="text-xs mt-4 text-[#002D74]">
+            If you are already a member, easily log in
+          </p>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -144,7 +178,7 @@ const NextLoginPage = () => {
               <div>
                 <button
                   type="submit"
-                  className="mt-2 flex w-full border border-black justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="mt-2 flex w-full border border-black justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white transition-colors hover:text-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   Sign in
                 </button>
@@ -178,8 +212,20 @@ const NextLoginPage = () => {
                     Google
                   </span>
                 </button>
-
                 <button
+                // update to Twitter
+                  onClick={() => {
+                    signIn("twitter");
+                  }}
+                  className="flex w-full items-center border border-gray-300 justify-center gap-3 rounded-md bg-white px-3 py-1.5 text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  <FaXTwitter />
+                  <span className="text-sm font-semibold leading-6">
+                    Twitter
+                  </span>
+                </button>
+
+                {/* <button
                   onClick={() => {
                     signIn("github");
                   }}
@@ -200,7 +246,7 @@ const NextLoginPage = () => {
                   <span className="text-sm font-semibold leading-6">
                     GitHub
                   </span>
-                </button>
+                </button> */}
                 
               </div>
               <p className="text-red-600 text-center text-[16px] my-4">

@@ -18,7 +18,7 @@ export const POST = async (request: any) => {
   const newUser = new User({
     email,
     password: hashedPassword,
-    firstName:'HB',
+    tier:'basic',
   });
 
   try {

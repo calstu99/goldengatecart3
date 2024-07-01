@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 
 import logo from "../../components/logo.svg";
 
+
+
 const RegisterPage = () => {
   const [error, setError] = useState("");
   const router = useRouter();
@@ -23,6 +25,35 @@ const RegisterPage = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
+
+  const sendEmail = async(send_to) =>{
+    // const to = 'haenergycapital@gmail.com';
+    const to = send_to
+    const subject = 'Hello from Next.js';
+    const text = 'This is a test email sent from Next.js';
+  
+    try {
+      const response = await fetch('/api/email/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ to, subject, text }),
+      });
+  
+      if (response.ok) {
+        console.log('Email sent successfully');
+      } else {
+        console.error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+
+  };
+
+
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const email = e.target[0].value;
@@ -66,6 +97,10 @@ const RegisterPage = () => {
         setError("");
         toast.success("Registration successful");
         router.push("/login");
+        // sendEmail(); 
+        await sendEmail(email);
+
+
       }
     } catch (error) {
       toast.error("Error, try again")
@@ -81,10 +116,13 @@ const RegisterPage = () => {
     sessionStatus !== "authenticated" && (
       <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="flex justify-center flex-col items-center">
-          <Image src={logo} alt="star logo" width={50} height={50} />
+          <Image src={logo} alt="star logo" width={35} height={35} />
           <h2 className="mt-6 text-center text-2xl leading-9 tracking-tight text-gray-900">
-            Sign up on our website
+            Sign up
           </h2>
+          <p className="text-xs text-center mt-4 text-[#002D74]">
+          Create an account to keep track of your orders and store addresses for a quicker checkout and more
+          </p>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -167,7 +205,7 @@ const RegisterPage = () => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full border border-black justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  className="flex w-full border border-black justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white transition-colors hover:text-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   Sign up
                 </button>

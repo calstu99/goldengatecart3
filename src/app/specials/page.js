@@ -6,7 +6,10 @@ import { useCart } from "../../components/CartContext";
 import ProductCard from '../../components/ProductCard';
 import ProductVariants from '../../components/ProductVariants';
 import {getAllProductsQuery} from '@/app/utils/ShopifyQuery';
-import {link_descriptions} from '@/app/utils/constants';
+import {link_headline,link_descriptions} from '@/app/utils/constants';
+import Image from "next/image";
+
+import {landingPageText, SpecialPagePics ,landingPagePics,Hero_links, Hero_offers} from '@/app/utils/constants';
 
 import {useSession } from "next-auth/react";
 
@@ -29,13 +32,21 @@ const LandingPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [description, setDescription] = useState('Select from our best products');
+  const [headline, setHeadline] = useState('Select from our best products');
 
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const { data: session } = useSession();
- 
+
+
+  // if (session) {
+  //   const { email, tier } = session.user;
+  //   console.log('email and tier: ',email,tier)
+  //   console.log('log session',session.user)
+  //   // Use email, tier, and firstname as needed
+  // }
 
   
 
@@ -77,12 +88,34 @@ const LandingPage = () => {
           ? (collectionHandlesFromURL.toString() || '').split(',')
           : process.env.NEXT_PUBLIC_COLLECTION_HANDLES_TO_FETCH.split(',');
 
+   
+        // Using - link_headline as an object
+        // Find the headline based on the collection handles 
+        // const matchingHeadline = collectionHandlesToFetch.find(
+        //   (handle) => link_headline[handle]
+        // );
+        // setHeadline(matchingHeadline ? link_headline[matchingHeadline] : '');
+
+
+        // using link_headline as an array of objects with key and values
+        const matchingHeadline = link_headline.find(
+          (item) => collectionHandlesToFetch.includes(item.key)
+        );
+        setHeadline(matchingHeadline ? matchingHeadline.value : '');
+
+
 
          // Find the description based on the collection handles
-        const matchingDescription = collectionHandlesToFetch.find(
-          (handle) => link_descriptions[handle]
+         
+        // const matchingDescription = collectionHandlesToFetch.find(
+        //   (handle) => link_descriptions[handle]
+        // );
+        // setDescription(matchingDescription ? link_descriptions[matchingDescription] : 'Select from our best products');
+
+        const matchingDescription = link_descriptions.find(
+          (item) => collectionHandlesToFetch.includes(item.key)
         );
-        setDescription(matchingDescription ? link_descriptions[matchingDescription] : 'Select from our best products');
+        setDescription(matchingDescription ? matchingDescription.value : 'Select from our best products');
 
 
         while (true) {
@@ -119,6 +152,19 @@ const LandingPage = () => {
 
         setProducts(allProducts);
         console.log('allProducts', allProducts);
+
+        // added for Url parameter --> &select=yes  -- http://localhost:3000/specials?collectionHandles=hair-serum-001&select=yes
+        const urlParams = new URLSearchParams(window.location.search)
+        const selectParam = urlParams.get('select')
+        if (selectParam === 'yes' && allProducts.length > 0) {
+          setSelectedProduct(allProducts[0]);
+        }
+
+        // console.log('urlSelectParam',selectParam);
+
+    
+
+
 
       } catch (error) {
         setError(error);
@@ -167,18 +213,25 @@ const LandingPage = () => {
         <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
           <div className="flex flex-wrap items-center sm:-mx-3">
 
-            <div className="w-full md:w-2/3 md:px-3">
+            <div className="w-full md:w-2/4 md:px-3">
               <div className="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
                 <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-xl md:text-3xl lg:text-3xl xl:text-4xl">
-                  <span className="block xl:inline">Shop with Us </span>
-                  <span className="block text-primary xl:inline">
+                  <span className="block xl:inline">Special Deals all year long.  </span>
+               
+                  {/* <span className="block xl:inline font-normal text-lg mt-4">Free shipping. Best prices.  </span> */}
+                  {/* <span className="block text-primary xl:inline">
                     Order Now!
-                  </span>
+                  </span> */}
                 </h1>
-                <p className="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">
+                <p className="mx-auto font-bold text-base text-special-text-100 sm:max-w-md lg:text-lg md:max-w-xl">
+                  {/* It's never been easier to get the best value for you money. One stop shop. */}
+                 {headline}
+                </p>
+                <p className="mx-auto font-normal text-base text-special-text-100 sm:max-w-md lg:text-lg md:max-w-xl">
                   {/* It's never been easier to get the best value for you money. One stop shop. */}
                  {description}
                 </p>
+                <br/><br/>
                 <div>
                   {/* {!session && <h1>Login for our discounts!</h1>} */}
                 </div>
@@ -188,14 +241,14 @@ const LandingPage = () => {
                   <div className="relative flex flex-col sm:flex-row sm:space-x-4">
                     <a
                       href="/login"
-                      className="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
+                      className="flex items-center w-full px-4 py-2 mb-3 text-sm text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
                     >
                       Login for discounts
 
                     </a>
                     <a
                       href="/register"
-                      className="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
+                      className="flex items-center px-4 py-2 text-sm text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
                     >
                       Sign up
                     </a>
@@ -205,20 +258,54 @@ const LandingPage = () => {
 
               </div>
             </div>
-            <div className="w-full md:w-1/3">
-              {/* <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-                <img src="https://images.unsplash.com/photo-1498049860654-af1a5c566876?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=8" />
-              </div> */}
+            {/* <div className="w-full md:w-1/3">
+             
 
-<div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-  <img
-    // src="https://images.pexels.com/photos/6238368/pexels-photo-6238368.jpeg?auto=compress"
-    src="https://images.pexels.com/photos/935760/pexels-photo-935760.jpeg?auto=compress"
-    alt="Image Description"
-    className="w-[100%] mx-auto"
-  />
-</div>
-            </div>
+              <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                <img
+                  // src="https://images.pexels.com/photos/6238368/pexels-photo-6238368.jpeg?auto=compress"
+                  // src="https://images.pexels.com/photos/935760/pexels-photo-935760.jpeg?auto=compress"
+                  src={landingPagePics.SpecialPic2}
+                  alt="Image Description"
+                  className="w-[40%] mx-auto"
+                />
+                
+              </div>
+              <div className="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                <img
+                  // src="https://images.pexels.com/photos/6238368/pexels-photo-6238368.jpeg?auto=compress"
+                  // src="https://images.pexels.com/photos/935760/pexels-photo-935760.jpeg?auto=compress"
+                  src={landingPagePics.SpecialPic2}
+                  alt="Image Description"
+                  className="w-[40%] mx-auto"
+                />
+              </div>           
+
+
+            </div> */}
+
+                    <div className="w-full md:w-2/4">
+                      <div className="flex justify-between space-x-4">
+                        <div className="w-1/2 h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                          <img
+                            src={SpecialPagePics.SpecialPic1}
+                            alt="Image Description"
+                            className="w-full h-full object-cover"
+                            // className="w-[100%] mx-auto"
+                          />
+                        </div>
+                        <div className="w-1/2 h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                          <img
+                            src={SpecialPagePics.SpecialPic2}
+                            alt="Image Description"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      
+                      </div>
+                    </div>
+
+
           </div>
         </div>
       </section>
@@ -235,14 +322,14 @@ const LandingPage = () => {
             )} */}
           </div>
           <div className="mb-4 text-sm">
-            <input
-              type="text"
-              placeholder="Search your products here..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={handleKeyDown}
-              className="border border-gray-300 rounded-md focus:outline-teal-400 focus:outline-1 focus:outline  py-2 px-4 mr-2 "
-            />
+          <input
+            type="text"
+            placeholder="Search Products"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="border border-gray-300 text-sm text-center rounded-md  focus:outline-teal-400 focus:outline-1 focus:outline  py-2 px-4 mr-2 "
+          />
             {/* https://stackoverflow.com/questions/74574022/change-the-focus-border-color-in-tailwind-css */}
 
             <button
@@ -263,6 +350,7 @@ const LandingPage = () => {
                   onAddToCart={addToCart}
                   selectedProduct={selectedProduct}
                   onCloseVariants={() => setSelectedProduct(null)}
+                  
                 />
               ))
             ) : (
@@ -274,6 +362,7 @@ const LandingPage = () => {
                   onAddToCart={addToCart}
                   selectedProduct={selectedProduct}
                   onCloseVariants={() => setSelectedProduct(null)}
+                  
                 />
               ))
             )}

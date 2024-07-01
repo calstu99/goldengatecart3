@@ -15,7 +15,7 @@ import { Star,Truck,Minimize2,Circle} from 'lucide-react';
 
 import Rating from './Rating'; 
 
-import ImageGallery from  '@/components/ImageGallery_new';
+import ImageGallery from  '@/components/ImageGallery';
 
 import {useSession } from "next-auth/react";
 
@@ -27,8 +27,45 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
   const { data: session } = useSession();
   console.log('session user', session?.user?.email);
 
-  const rating = selectedProduct.tags.includes("high") ? 4.8 : selectedProduct.tags.includes("medium") ? 3.9 : 2.2;
 
+  /* 
+The extractRatingValue function takes a ratingString as input and uses a regular expression to match and extract the numeric rating value. The regular expression /rating\s*(\d+(\.\d+)?)/i matches strings like "rating 3.4", "rating 4.0", "rating 4.8", or "rating 5.0". The \s* matches any whitespace characters, and the (\d+(\.\d+)?) captures the numeric value, including decimal points. The i flag makes the match case-insensitive.
+Inside the extractRatingValue function, if a match is found, it returns the extracted numeric value as a floating-point number using parseFloat. If no match is found, it returns null.
+  */
+
+  const extractRatingValue = (ratingString) => {
+    const match = ratingString.match(/rating\s*(\d+(\.\d+)?)/i);
+    return match ? parseFloat(match[1]) : null;
+  };
+
+  // const rating = selectedProduct.tags.includes("high") ? 4.8 : selectedProduct.tags.includes("medium") ? 3.9 : 2.2;
+
+  /*
+The function roundToOneDecimal is added, which takes a value as input and rounds it to one decimal place using the Math.round function.
+  */
+
+  // const roundToOneDecimal = (value) => {
+  //   return Math.round(value * 10.1) / 10;
+  // };
+
+
+
+/*
+The rating constant is now assigned a value based on the following logic
+First, it checks if any of the tags in selectedProduct.tags match the rating pattern using the some method and the extractRatingValue function.
+If a matching tag is found, it uses the find method to locate the first tag that matches the rating pattern and extracts the numeric rating value using the extractRatingValue function.
+If no matching tag is found, the rating constant is assigned the default value of 2.2.
+*/
+
+  const rating = selectedProduct.tags.some((tag) => {
+    const ratingValue = extractRatingValue(tag);
+    return ratingValue !== null;
+  }) ? extractRatingValue(selectedProduct.tags.find((tag) => extractRatingValue(tag) !== null)) : 2.2;
+
+  // const rating = selectedProduct.tags.some((tag) => {
+  //   const ratingValue = extractRatingValue(tag);
+  //   return ratingValue !== null;
+  // }) ? roundToOneDecimal(extractRatingValue(selectedProduct.tags.find((tag) => extractRatingValue(tag) !== null))) : 2.2;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -71,8 +108,8 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
       <div className="product-variants-modal" ref={modalRef}>
         <div className="bg-white rounded-lg p-4 mt-4 mx-2">
 
-          <button className="ml-auto" onClick={onCloseVariants}>
-            <div className="rounded-full bg-gray-300 p-2">
+          <button className="ml-auto " onClick={onCloseVariants}>
+            <div className="rounded-full hover:bg-gray-300 bg-gray-200 p-2">
               <Minimize2 size={35} strokeWidth={1.0}/>
             </div>
           </button>
@@ -97,7 +134,7 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
                       </span>
                       <Star className="h-5 w-5 text-white" size={25} />
                     </button> */}
-                    <button className="flex items-center gap-2 rounded-full bg-violet-500 px-3 py-1">
+                    <button className="flex items-center gap-2 rounded-full bg-slate-400 px-3 py-1">
                       <span className="text-sm font-semibold text-white">
                         {rating}
                       </span>
@@ -169,7 +206,7 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
 
                     <span className="text-gray-500 text-sm ml-4">
                       {0 < selectedProduct.totalInventory && selectedProduct.totalInventory < 6 ? (
-                        <span className="text-lg font-medium text-red-500">Almost sold out</span>
+                        <span className="text-base font-medium text-red-500">Almost sold out</span>
                       ) : (
                         <>
                         <br/>

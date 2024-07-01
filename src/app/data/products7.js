@@ -263,7 +263,7 @@ const LandingPage = () => {
         </div> */}
 
 
-<div className="mx-auto container flex justify-center items-center bg-stone-800 py-12 px-4 sm:px-6 2xl:px-0">
+<div className="mx-auto container flex justify-center items-center bg-stone-800 py-12 px-4 sm:px-6 2xl:px-4">
   {/*- more free and premium Tailwind CSS components at https://tailwinduikit.com/ -*/}
   
   <div className="flex flex-col  lg:flex-row justify-center items-center space-y-6 lg:space-y-0">
@@ -279,13 +279,15 @@ const LandingPage = () => {
       <p className="text-sm leading-6 text-white uppercase">
          {landingPageText.MainText}
         </p>
+        <br/>
         <p className="text-sm leading-6 text-white uppercase">
          {landingPageText.holidayText}
         </p>
       </div>
      
               <Link
-                href="/specials?collectionHandles=best-sellers"
+                // href="/specials?collectionHandles=best-sellers"
+                href={`/specials?collectionHandles=${process.env.NEXT_PUBLIC_BEST_SELLERS}`}
                 className=" w-full"
               >
                 <div className="mt-16 w-full">
@@ -326,6 +328,8 @@ const LandingPage = () => {
               </Link>  
        
     </div>
+
+    
     <div className="flex flex-col sm:flex-row justify-center items-center sm:space-x-5 xl:space-x-8 space-y-4 sm:space-y-0">
         {bestSellerProducts.map((product, idx) => (
           <div key={idx} className="overflow-hidden rounded-lg bg-gray-100">
@@ -371,11 +375,11 @@ const LandingPage = () => {
         <div className="mb-4 text-sm">
           <input
             type="text"
-            placeholder="Search your products here..."
+            placeholder="Search Products"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="border border-gray-300 rounded-md focus:outline-teal-400 focus:outline-1 focus:outline  py-2 px-4 mr-2 "
+            className="border border-gray-300 text-sm text-center rounded-md  focus:outline-teal-400 focus:outline-1 focus:outline  py-2 px-4 mr-2 "
           />
           {/* https://stackoverflow.com/questions/74574022/change-the-focus-border-color-in-tailwind-css */}
          

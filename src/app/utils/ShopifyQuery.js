@@ -47,7 +47,7 @@ query getAllProducts($first: Int, $after: String) {
             }
           }
         }
-        images(first: 5) {
+        images(first: 8) {
           edges {
             node {
               src
