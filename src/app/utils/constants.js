@@ -10,8 +10,8 @@ export const landingPageText = {
 
 export const HeroPagePics = {
   "Pic1": "https://i.postimg.cc/GhNJJ5dn/phoenix-women1.png",
-  "Pic2": "https://m.media-amazon.com/images/I/41ozxDtIRAL._SL1000_.jpg",
-  "Pic3": "https://m.media-amazon.com/images/I/41KUYB3recL._SL1000_.jpg",
+  "Pic2": "https://m.media-amazon.com/images/I/715zWZi6aAL._SL1500_.jpg",
+  "Pic3": "https://m.media-amazon.com/images/I/81AVBrYD3uL._SL1500_.jpg",
   "Pic4": "https://images.pexels.com/photos/8154672/pexels-photo-8154672.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=200&w=460"
 };
 
