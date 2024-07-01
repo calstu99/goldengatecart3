@@ -28,30 +28,30 @@ const NextLoginPage = () => {
     return emailRegex.test(email);
   };
 
-  const sendEmail = async() =>{
-    const to = 'haenergycapital@gmail.com';
-    const subject = 'Hello from Next.js';
-    const text = 'This is a test email sent from Next.js';
+  // const sendEmail = async() =>{
+  //   const to = 'haenergycapital@gmail.com';
+  //   const subject = 'Hello from Next.js';
+  //   const text = 'This is a test email sent from Next.js';
   
-    try {
-      const response = await fetch('/api/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ to, subject, text }),
-      });
+  //   try {
+  //     const response = await fetch('/api/email', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ to, subject, text }),
+  //     });
   
-      if (response.ok) {
-        console.log('Email sent successfully');
-      } else {
-        console.error('Failed to send email');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-    }
+  //     if (response.ok) {
+  //       console.log('Email sent successfully');
+  //     } else {
+  //       console.error('Failed to send email');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error sending email:', error);
+  //   }
 
-  };
+  // };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ const NextLoginPage = () => {
       setError("");
       toast.success("Successful login");
 
-      // sendEmail(); -- move this to register
+      
 
 
     }
