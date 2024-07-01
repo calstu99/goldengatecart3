@@ -26,7 +26,7 @@ const RegisterPage = () => {
     return emailRegex.test(email);
   };
 
-  const sendEmail = async(send_to) =>{
+  const sendEmail = async(send_to:string) =>{
     // const to = 'haenergycapital@gmail.com';
     const to = send_to
     const subject = 'Hello from Next.js';
