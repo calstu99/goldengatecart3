@@ -145,7 +145,9 @@ const dataToStore =
     const transaction_id = paymentDetails.transaction_id;
   
     try {
-      const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+      // const apiBaseUrl = process.env.NEXT_PUBLIC_BASE_API_URL || 'http://localhost:3000';
+      const apiBaseUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+
       const response = await fetch(`${apiBaseUrl}/api/email/receipt`, {
         method: 'POST',
         headers: {
