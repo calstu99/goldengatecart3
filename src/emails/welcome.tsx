@@ -21,6 +21,7 @@ const baseUrl = process.env.VERCEL_URL
   : "";
 
   const websiteName = process.env.NEXT_PUBLIC_WEBSITE_NAME;
+  const website_url = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 // export const Email = () => {
@@ -58,7 +59,7 @@ const baseUrl = process.env.VERCEL_URL
             uncover qualified leads and close deals faster.
           </Text>
           <Section style={btnContainer}>
-            <Button style={button} href="https://getkoala.com">
+            <Button style={button} href={website_url}>
               Get started
             </Button>
           </Section>

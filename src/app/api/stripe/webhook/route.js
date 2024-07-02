@@ -105,6 +105,7 @@ await saveDataToDatabase(dataToStore);
   const shipping_address =  paymentDetails.address[0];
   const orderDate = paymentDetails.currentDate;
   const transaction_id = paymentDetails.transaction_id;
+  const paymentMethod = paymentDetails.paymentMethod;
 
   try {
     // const apiBaseUrl = process.env.NEXT_PUBLIC_BASE_API_URL || 'http://localhost:3000';
@@ -114,7 +115,7 @@ await saveDataToDatabase(dataToStore);
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ to, subject, text, total, name, email,items,shipping_address, orderDate,transaction_id}),
+      body: JSON.stringify({ to, subject, text, total, name, email,items,shipping_address, orderDate,transaction_id,paymentMethod }),
     });
 
     if (response.ok) {

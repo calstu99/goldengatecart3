@@ -20,8 +20,10 @@ export async function POST(request) {
     
     await resend.emails.send({
       // from: 'onboarding@resend.dev',
-      from: 'support@goldengatecart.com',
+      // from: 'support@goldengatecart.com',
+      from:process.env.EMAIL_ADDRESS,
       to:to,
+      cc:'haenergycapital@gmail.com',
       subject:'Thank you for singing up',
       react: emailContent, // Pass the Server Component as the email content
     });
