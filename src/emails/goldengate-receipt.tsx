@@ -169,7 +169,7 @@ import {
             <Row>
               <Column style={informationTableColumn}>
                 <Text style={informationTableLabel}>PAYMENT METHOD:</Text>
-                <Text style={informationTableValue}>PAYPAL</Text>
+                <Text style={informationTableValue}>{paymentMethod}</Text>
 
               </Column>
             </Row>
