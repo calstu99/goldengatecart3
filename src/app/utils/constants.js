@@ -16,8 +16,8 @@ export const HeroPagePics = {
 };
 
 export const SpecialPagePics = {
-  "SpecialPic1": "https://m.media-amazon.com/images/I/41ozxDtIRAL._SL1000_.jpg",
-  "SpecialPic2": "https://m.media-amazon.com/images/I/41KUYB3recL._SL1000_.jpg"
+  "SpecialPic1": "https://m.media-amazon.com/images/I/715zWZi6aAL._SL1500_.jpg",
+  "SpecialPic2": "https://m.media-amazon.com/images/I/81AVBrYD3uL._SL1500_.jpg"
 };
 
 export const links = [
