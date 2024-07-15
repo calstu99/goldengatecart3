@@ -20,7 +20,7 @@ import {
        SheetFooter,
        SheetContent,
        SheetClose,
-  } from "../components/ui/sheet";
+  } from "./ui/sheet";
 
 const links = [
     { name: "Home", href: "/" },

@@ -34,6 +34,14 @@ const userSchema = new Schema(
       
     },
     tier:{type:String},
+    resetToken:{
+      type:String,
+      required:false,
+    },
+    resetTokenExpiry: {
+      type:Date,
+      required:false
+    },
     
     addresses: [addressSchema],
   },

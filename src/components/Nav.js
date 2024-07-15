@@ -6,19 +6,11 @@ import { usePathname } from 'next/navigation';
 import { useCart } from "./CartContext";
 import  { useState, useEffect } from 'react';
 import { Description, Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-
 import { Dancing_Script } from 'next/font/google';
 import requireAuth from "@/app/utils/requireAuth";
-
-
-
 import { signOut, useSession } from "next-auth/react";
-
 import Image from 'next/image';
-// import logo from '../../public/next.svg';
-// import logo from '../components/logo.svg';
 import logo from '../../public/images/logo.png';
-
 import { Button } from './ui/button';
 import {ShoppingBag, ShoppingCart, Menu, Minimize2, User} from 'lucide-react';
 import {
@@ -28,8 +20,7 @@ import {
        SheetContent,
        SheetClose,
   } from "../components/ui/sheet";
-
-  import {links} from '@/app/utils/constants';
+import {links} from '@/app/utils/constants';
 
 // const links = [
 //     { name: "Home", href: "/" },

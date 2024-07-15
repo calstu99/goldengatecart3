@@ -12,35 +12,33 @@ import {
   } from "@react-email/components";
   import * as React from "react";
   
-  interface DropboxResetPasswordEmailProps {
+  interface ResetPasswordEmailProps {
     userFirstname?: string;
     resetPasswordLink?: string;
   }
   
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "";
-  
-  export const DropboxResetPasswordEmail = ({
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+  const websiteName = process.env.NEXT_PUBLIC_WEBSITE_NAME;
+  export const ResetPasswordEmail = ({
     userFirstname,
     resetPasswordLink,
-  }: DropboxResetPasswordEmailProps) => {
+  }: ResetPasswordEmailProps) => {
     return (
       <Html>
         <Head />
         <Preview>Dropbox reset your password</Preview>
         <Body style={main}>
           <Container style={container}>
-            <Img
-              src={`${baseUrl}/static/dropbox-logo.png`}
-              width="40"
-              height="33"
-              alt="Dropbox"
-            />
+          <Img
+                  src="https://i.postimg.cc/GhNJJ5dn/phoenix-women1.png"
+                  width="70"
+                  height="84"
+                  alt={websiteName}
+                />
             <Section>
-              <Text style={text}>Hi {userFirstname},</Text>
+              <Text style={text}>Email: {userFirstname},</Text>
               <Text style={text}>
-                Someone recently requested a password change for your Dropbox
+                Someone recently requested a password change for your
                 account. If this was you, you can set a new password here:
               </Text>
               <Button style={button} href={resetPasswordLink}>
@@ -51,13 +49,12 @@ import {
                 request this, just ignore and delete this message.
               </Text>
               <Text style={text}>
-                To keep your account secure, please don&apos;t forward this email
-                to anyone. See our Help Center for{" "}
-                <Link style={anchor} href="https://dropbox.com">
-                  more security tips.
+                Reset Password{" "}
+                <Link style={anchor} href={resetPasswordLink}>
+                 
                 </Link>
               </Text>
-              <Text style={text}>Happy Dropboxing!</Text>
+              <Text style={text}>Happy Shopping!</Text>
             </Section>
           </Container>
         </Body>
@@ -65,12 +62,12 @@ import {
     );
   };
   
-  DropboxResetPasswordEmail.PreviewProps = {
+  ResetPasswordEmail.PreviewProps = {
     userFirstname: "Alan",
     resetPasswordLink: "https://dropbox.com",
-  } as DropboxResetPasswordEmailProps;
+  } as ResetPasswordEmailProps;
   
-  export default DropboxResetPasswordEmail;
+  export default ResetPasswordEmail;
   
   const main = {
     backgroundColor: "#f6f9fc",

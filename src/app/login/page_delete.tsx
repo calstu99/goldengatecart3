@@ -94,14 +94,9 @@ const NextLoginPage = () => {
     return <h1>Loading...</h1>;
   }
   return (
-
     sessionStatus !== "authenticated" && (
-
-    <>
-
-      {/* <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8"> */}
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className=" py-4 flex justify-center flex-col items-center">
+      <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="flex justify-center flex-col items-center">
           <Image src= {logo} alt="star logo" width={35} height={35} />
           <h2 className="mt-6 text-center text-2xl leading-9 tracking-tight text-gray-900">
             Login
@@ -111,9 +106,7 @@ const NextLoginPage = () => {
           </p>
         </div>
 
-        {/* <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-[480px]"> */}
-        <div className="w-full my-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-
+        <div className="mt-10  sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
@@ -130,7 +123,7 @@ const NextLoginPage = () => {
                     type="email"
                     autoComplete="email"
                     required
-                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"                
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -149,7 +142,7 @@ const NextLoginPage = () => {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-md focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
               </div>
@@ -263,10 +256,6 @@ const NextLoginPage = () => {
           </div>
         </div>
       </div>
-
-    </>
-
-
     )
   );
 };

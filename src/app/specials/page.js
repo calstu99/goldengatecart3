@@ -15,6 +15,9 @@ import {useSession } from "next-auth/react";
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 
+// import Image from 'next/image';
+import Zoom from 'react-medium-image-zoom';
+
 // (Storefront API client configuration and GraphQL query)
 
 const client = createStorefrontApiClient({
@@ -115,7 +118,16 @@ const LandingPage = () => {
         const matchingDescription = link_descriptions.find(
           (item) => collectionHandlesToFetch.includes(item.key)
         );
-        setDescription(matchingDescription ? matchingDescription.value : 'Select from our best products');
+        // setDescription(matchingDescription ? matchingDescription.value : 'Select from our best products');
+        if (matchingDescription) {
+          // Split the description into paragraphs
+          const paragraphs = matchingDescription.value.split('\n\n');
+          // const paragraphs = matchingDescription.value.split('||');
+
+          setDescription(paragraphs);
+        } else {
+          setDescription(['Select from our best products']);
+        }
 
 
         while (true) {
@@ -284,7 +296,7 @@ const LandingPage = () => {
 
             </div> */}
 
-                    <div className="w-full md:w-2/4">
+                    {/* <div className="w-full  md:w-2/4">
                       <div className="flex justify-between space-x-4">
                         <div className="w-1/2 h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
                           <img
@@ -303,7 +315,41 @@ const LandingPage = () => {
                         </div>
                       
                       </div>
-                    </div>
+                    </div> */}
+
+<div className="w-full md:w-2/5 lg:w-3/6 mb-12 md:mb-16">
+  <div className="relative pr-12 flex h-64 md:h-80 lg:h-96"> {/* Fixed height */}
+    <div className="relative left-2 top-14 z-20 overflow-hidden rounded-lg sm:w-full md:w-4/5 h-full"> {/* First image */}
+      <Zoom>
+        <img
+          src={SpecialPagePics.SpecialPic1}
+          alt="Image Description"
+          className="h-full w-full object-contain object-center"
+        />
+      </Zoom>
+    </div>
+
+    <div className="relative right-14 top-20 z-30 -ml-2 overflow-hidden rounded-lg w-1/5 h-3/4"> {/* Second image */}
+      <Zoom>
+        <img
+          src={SpecialPagePics.SpecialPic2}
+          alt="Image Description"
+          className="h-full w-full object-contain object-center"
+        />
+      </Zoom>
+    </div>
+
+    <div className="relative right-6 top-8 z-20 -ml-14 overflow-hidden rounded-lg w-5/5 h-full"> {/* Third image */}
+      <Zoom>
+        <img
+          src={SpecialPagePics.SpecialPic3}
+          alt="Image Description"
+          className="h-full w-full object-contain object-center"
+        />
+      </Zoom>
+    </div>
+  </div>
+</div>
 
 
           </div>

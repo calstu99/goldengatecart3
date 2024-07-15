@@ -22,7 +22,7 @@
     },
     "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth]/route.js", "src/app/api/auth/[...nextauth]/auth-options.js", "src/emails/goldengate-receipt.tsx", "src/app/utils/requireAuth.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/auth/[...nextauth]/route.js", "src/app/api/auth/[...nextauth]/auth-options.js", "src/emails/goldengate-receipt.tsx", "src/app/utils/requireAuth.js", "src/app/api/email/reset-password/route.js", "src/app/api/forgot-password/route.js"],
   "exclude": ["node_modules"]
 }
 

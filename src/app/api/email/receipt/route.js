@@ -70,7 +70,7 @@ export async function POST(request) {
         // });
     
       
-    console.log('email sent');
+    // console.log('email sent');
     return NextResponse.json({ status: 'Ok' });
 
     

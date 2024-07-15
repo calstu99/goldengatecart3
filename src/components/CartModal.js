@@ -11,7 +11,6 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import {Minus,Plus,Trash, ShoppingCart, ShoppingBag, CreditCard} from 'lucide-react';
-
 import PayPalButton  from './PayPalButton';
 
 const CartModal = () => {
@@ -128,7 +127,7 @@ const CartModal = () => {
 
   const handleDecrement = (productId) => {
     decrementQuantity(productId);
-   // setPaypalButtonKey(paypalButtonKey + 1);
+   setPaypalButtonKey(paypalButtonKey + 1);
 
     const product = cart.find((item) => item.id === productId);
     if (product && product.quantity === 0) {
@@ -138,7 +137,7 @@ const CartModal = () => {
 
   const handleIncrement = (productId) => {
     incrementQuantity(productId);
-    //setPaypalButtonKey(paypalButtonKey + 1);
+    setPaypalButtonKey(paypalButtonKey + 1);
   };
 
   const checkout = async () => {

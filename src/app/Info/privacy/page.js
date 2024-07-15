@@ -106,7 +106,7 @@ const PrivacyPolicyPage = () => {
       <div className="mx-24 mt-12 mb-8 text-center text-gray-600">
         <p>
           If you have any questions about our Privacy Policy, please don't hesitate to reach out
-          to us at <a href="mailto:privacy@yourecommercesite.com" className="text-blue-600 hover:underline">privacy@yourecommercesite.com</a> and we will get back to you
+          to us at <a href="mailto:support@trurosa.com" className="text-blue-600 hover:underline">support@trurosa.com</a> and we will get back to you
           during our office hours from Monday - Friday, 9 am – 6 pm ET.
         </p>
       </div>
