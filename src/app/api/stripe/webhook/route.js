@@ -95,9 +95,6 @@ await saveDataToDatabase(dataToStore);
 
  // Function to email receipt
  const sendEmail = async(paymentDetails) => {
-  const to = 'haenergycapital@gmail.com';
-  const subject = 'Thank you for your order';
-  const text = 'This is a test order';
   const total = paymentDetails.sub_total;
   const name = paymentDetails.name;
   const email = paymentDetails.email;
@@ -115,7 +112,7 @@ await saveDataToDatabase(dataToStore);
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ to, subject, text, total, name, email,items,shipping_address, orderDate,transaction_id,paymentMethod }),
+      body: JSON.stringify({total, name, email,items,shipping_address, orderDate,transaction_id,paymentMethod }),
     });
 
     if (response.ok) {
@@ -164,6 +161,7 @@ export async function POST(req) {
       console.log( 'Stripe checkout session completed', JSON.stringify(res?.data?.object));
       const lineItems = await stripe.checkout.sessions.listLineItems(res?.data?.object?.id);
       console.log('line items',JSON.stringify(lineItems));
+      
       const purchasedItems = lineItems.data.map((item) => ({
         name: item.description,
         quantity: Number(item.quantity),
@@ -190,10 +188,11 @@ export async function POST(req) {
       }
     );
   } catch (error) {
+    console.log('Webhook error:', error);
     return new Response(
       JSON.stringify({ status: "Failed", error: error.message }),
       {
-        status: 500,
+        status: 400,
         headers: {
           "Content-Type": "application/json",
         },

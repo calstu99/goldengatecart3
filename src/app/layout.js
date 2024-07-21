@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import CartSummary from '@/components/CartSummary';
 import SessionProvider from "@/app/utils/SessionProvider";
 import { getServerSession } from "next-auth";
+import FacebookPixel from "@/components/FacebookPixel";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default async function RootLayout({ children }) {
         <Nav />
         <CartModal/>
         <Toaster/>
+        <FacebookPixel/>
         {children}
         <Footer/>
         <CartSummary /> {/* Add this line */}

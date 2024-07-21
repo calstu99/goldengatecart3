@@ -133,9 +133,9 @@ const dataToStore =
 
   // Function to email receipt
   const sendEmail = async(paymentDetails) => {
-    const to = 'haenergycapital@gmail.com';
-    const subject = 'Thank you for your order';
-    const text = 'This is a test order';
+    // const to = 'haenergycapital@gmail.com';
+    // const subject = 'Thank you for your order';
+    // const text = 'This is a test order';
     const total = paymentDetails.sub_total;
     const name = paymentDetails.name;
     const email = paymentDetails.email;
@@ -154,7 +154,7 @@ const dataToStore =
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ to, subject, text, total, name, email,items,shipping_address, orderDate,transaction_id,paymentMethod }),
+        body: JSON.stringify({total, name, email,items,shipping_address, orderDate,transaction_id,paymentMethod }),
       });
   
       if (response.ok) {

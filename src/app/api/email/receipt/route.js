@@ -14,9 +14,6 @@ export async function POST(request) {
   // const { to, subject, text, total} = await request.json();
 
   const { 
-    to, 
-    subject, 
-    text, 
     total, 
     name, 
     email, 
@@ -54,9 +51,9 @@ export async function POST(request) {
       // from: 'onboarding@resend.dev',
       // from: 'Golden Gate Cart <support@goldengatecart.com>',
       from: process.env.EMAIL_ADDRESS,
-      to:'haenergycapital@gmail.com',// change to email
-      // cc:'howard.beckford@gmail.com',
-      // subject: 'New Order Received',
+      // to:'haenergycapital@gmail.com',// change to email
+      to:email,
+      cc: process.env.CC_EMAIL_ADDRESSES ? process.env.CC_EMAIL_ADDRESSES.split(',') : [],
       subject: `${websiteName} Order Confirmation #${transaction_id}`,
       react: emailContent, // Pass the Server Component as the email content
     });

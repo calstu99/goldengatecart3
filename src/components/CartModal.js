@@ -140,23 +140,57 @@ const CartModal = () => {
     setPaypalButtonKey(paypalButtonKey + 1);
   };
 
+  // const checkout = async () => {
+  //   await fetch("/api/checkout", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ products: cart }),
+  //   })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.url) {
+  //         window.location.href = response.url;
+  //       }
+  //     });
+  // };
+
   const checkout = async () => {
-    await fetch("/api/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ products: cart }),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.url) {
-          window.location.href = response.url;
-        }
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ products: cart }),
       });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log("Checkout response:", data);
+  
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.warn("No redirect URL provided in the response");
+      }
+    } catch (error) {
+      console.error("Checkout error:", error.message);
+      
+       // You can add more specific error handling here
+      if (error instanceof TypeError) {
+        console.error("Network error: Please check your internet connection");
+      } else if (error instanceof SyntaxError) {
+        console.error("JSON parsing error: Invalid response from server");
+      }
+    }
   };
 
   useEffect(() => {

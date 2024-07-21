@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-// import NetlifyWelcomeEmail from '@/emails/goldencartWelcome'; // Import the Server Component
-import {Email } from '@/emails/welcome';
+import {WelcomeEmail } from '@/emails/welcome';
 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -11,19 +10,17 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(request) {
 
 
-  const { to, subject, text } = await request.json();
+  const {to} = await request.json();
 
   try {
-    const emailContent = <Email/>; // Use the Server Component directly
-    // const emailContent = <NetlifyWelcomeEmail/>; // Use the Server Component directly
-
+    const emailContent = <WelcomeEmail/>; // Use the Server Component directly
     
     await resend.emails.send({
       // from: 'onboarding@resend.dev',
       // from: 'support@goldengatecart.com',
       from:process.env.EMAIL_ADDRESS,
       to:to,
-      cc:'haenergycapital@gmail.com',
+      cc: process.env.CC_EMAIL_ADDRESSES ? process.env.CC_EMAIL_ADDRESSES.split(',') : [],
       subject:'Thank you for singing up',
       react: emailContent, // Pass the Server Component as the email content
     });

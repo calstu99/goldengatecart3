@@ -23,27 +23,13 @@ const baseUrl = process.env.VERCEL_URL
   const websiteName = process.env.NEXT_PUBLIC_WEBSITE_NAME;
   const website_url = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-
-// export const Email = () => {
-//     return (
-//       <Html>
-//         <Button
-//           href="https://example.com"
-//           style={{ background: "#000", color: "#fff", padding: "12px 20px" }}
-//         >
-//           Click me
-//         </Button>
-//       </Html>
-//     );
-//   };
-
-  export const Email = ({
+  export const WelcomeEmail = ({
     userFirstname,
   }: EmailProps) => (
     <Html>
       <Head />
       <Preview>
-        The sales intelligence platform that helps you uncover qualified leads.
+       The Best in high quality beauty and hair products!
       </Preview>
       <Body style={main}>
         <Container style={container}>
@@ -53,35 +39,41 @@ const baseUrl = process.env.VERCEL_URL
                   height="120"
                   alt={websiteName}
                 />
-          <Text style={paragraph}>Hi {userFirstname},</Text>
+          <Text style={paragraph}>Welcome to  {websiteName}!</Text>
           <Text style={paragraph}>
-            Welcome to {websiteName}, the sales intelligence platform that helps you
-            uncover qualified leads and close deals faster.
+            Thank you for signing up for {websiteName}. We're thrilled to have you on board! Here at {websiteName}, we strive to provide
+            the best service to help you find the best quality beauty and hair products.
           </Text>
+          {/* <Text style={paragraph}>
+            If you have any questions, feel free to reply to this email or reach out to our support team at <a href={`mailto:${process.env.EMAIL_ADDRESS}`}>{process.env.EMAIL_ADDRESS}</a>
+          </Text> */}
+
+           {/* <Text style={paragraph}>
+            If you have any questions, feel free to reply to this email or reach out to our support team at {`${website_url}/Info/faq`}.
+          </Text> */}
+          
           <Section style={btnContainer}>
             <Button style={button} href={website_url}>
-              Get started
+              Login and get started
             </Button>
           </Section>
           <Text style={paragraph}>
-            Best,
+            Best regards,
             <br />
             The {websiteName } team
           </Text>
           <Hr style={hr} />
-          <Text style={footer}>
-            470 Noor Ave STE B #1148, South San Francisco, CA 94080
-          </Text>
+          
         </Container>
       </Body>
     </Html>
   );
   
-  Email.PreviewProps = {
+  WelcomeEmail.PreviewProps = {
     userFirstname: "Alan",
   } as EmailProps;
   
-  export default Email;
+  export default WelcomeEmail;
   
   const main = {
     backgroundColor: "#ffffff",
