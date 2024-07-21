@@ -22,6 +22,9 @@ import {
   } from "../components/ui/sheet";
 import {links} from '@/app/utils/constants';
 
+// Import the event function from your fpixel.js file
+import { event as fbEvent } from '../lib/fpixel';
+
 // const links = [
 //     { name: "Home", href: "/" },
 //     { name: "Men", href: "/Men" },
@@ -44,6 +47,17 @@ const Nav = () => {
     console.log('session',session);
 
     const isAuthorized = requireAuth(true); // Pass true for adminOnly
+
+    const handleCartButtonClick = () => {
+      // Track the event with Facebook Pixel
+      fbEvent('OpenCart', {
+        content_name: 'Cart Button',
+        content_category: 'User Actions',
+      });
+  
+      // Call the openCart function
+      openCart();
+    };
 
     useEffect(() => {
       const handleScroll = () => {
@@ -151,7 +165,8 @@ const Nav = () => {
           <div className="flex sm:border-1 border-solid border-gray-100 mx-10">
             <button
               variant={"outline"}
-              onClick={() => openCart()}
+              // onClick={() => openCart()}
+              onClick={handleCartButtonClick}
               className="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
               aria-label="Cart"
             >
@@ -164,48 +179,6 @@ const Nav = () => {
                 </span>
               )}
             </button>
-            {/* <button  
-            onClick={() => { signOut(); }}>
-              Login
-            </button>
-            <button  
-            onClick={() => { signOut(); }}>
-              Logout
-            </button> */}
-
-            {/* <div className="flex flex-1 items-center justify-end gap-x-2">
-              {!session ? (
-                <>
-                  <Link
-                    href="/login"
-                    className=" ml-2 hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900"
-                  >
-                    Log in
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="ml-2 rounded-md bg-purple-500 px-3 py-2 border border-gray-500 border-1 text-xs font-semibold text-white shadow-sm hover:bg-slate-50 hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Sign up
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <span className="ml-10 text-sm">{session.user?.email}</span>
-
-                  <button
-                    onClick={() => {
-                      signOut();
-                    }}
-                    className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900"
-                  >
-                    Log out
-                  </button>
-                </>
-              )}
-            </div> */}
-
-
 
           </div>
           <div className="flex flex-1 items-center justify-end gap-x-2">
@@ -249,64 +222,6 @@ const Nav = () => {
                 <Menu className="w-6 h-6 mr-4" />
               </button>
             </div>
-
-            {/* {isMobileMenuOpen && (
-          <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {links.map((link, idx) => (
-                <Link
-                  key={idx}
-                  href={link.href}
-                  className={`${
-                    pathname === link.href
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                  } block px-3 py-2 rounded-md text-base font-medium`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-            <div className="pt-4 pb-3 border-t border-gray-700">
-              <div className="flex items-center px-5">
-                <div className="flex-shrink-0">
-                  {session ? (
-                    <span className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
-                      {session.user?.email}
-                    </span>
-                  ) : (
-                    <>
-                      <Link
-                        href="/login"
-                        className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                      >
-                        Log in
-                      </Link>
-                      <Link
-                        href="/register"
-                        className="ml-2 bg-purple-500 text-white px-3 py-2 rounded-md text-sm font-medium"
-                      >
-                        Sign up
-                      </Link>
-                    </>
-                  )}
-                </div>
-                <div className="ml-3">
-                  {session && (
-                    <button
-                      onClick={() => {
-                        signOut();
-                      }}
-                      className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Log out
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )} */}
 
           <Dialog open={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} className="relative z-50">
             <div>

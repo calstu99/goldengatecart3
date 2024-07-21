@@ -21,3 +21,6 @@ export default function Document() {
     </Html>
   );
 }
+
+//the _document.js file is still useful for customizing the HTML document structure, including adding meta tags, external scripts, and other elements to the <head> or <body>.
+//You can include a <noscript> tag for Facebook Pixel, which is important for tracking users who have JavaScript disabled, you can still use a custom _document.js file

@@ -3,15 +3,25 @@
 import { useContext } from 'react';
 // import { CartContext } from './CartContext';
 import { useCart } from "./CartContext";
+// Import the event function from your fpixel.js file
+import { event as fbEvent } from '../lib/fpixel';
 
 const CartSummary = () => {
 //   const { cart } = useContext(CartContext);
   const {cart, openCart} = useCart();
 
+  
+
   const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cart.reduce((total, item) => total + item.quantity * item.price, 0);
 
   const handleClick = () => {
+     // Track the event with Facebook Pixel
+     fbEvent('OpenCart', {
+      content_name: 'Cart Button',
+      content_category: 'User Actions',
+    });
+      // Call the openCart function
     openCart();
   };
 
