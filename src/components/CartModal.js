@@ -135,9 +135,19 @@ const CartModal = () => {
     }
   };
 
+  // const handleIncrement = (productId) => {
+  //   incrementQuantity(productId);
+  //   setPaypalButtonKey(paypalButtonKey + 1);
+  // };
   const handleIncrement = (productId) => {
-    incrementQuantity(productId);
-    setPaypalButtonKey(paypalButtonKey + 1);
+    const product = cart.find((item) => item.id === productId);
+    if (product && product.quantity < 25) {
+      incrementQuantity(productId);
+      setPaypalButtonKey(paypalButtonKey + 1);
+    } else {
+      // Optionally, you can show a message to the user
+      alert("Maximum quantity of 25 units reached for this product.");
+    }
   };
 
   // const checkout = async () => {
