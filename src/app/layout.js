@@ -18,7 +18,7 @@ export const metadata = {
   // title: "Golden Gate Cart",
   // description: "Powering Top Fashion for a top price",
   title: process.env.NEXT_PUBLIC_WEBSITE_NAME || "Golden Gate Cart",
-  description: process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION || "Powering Exclusive high quality products ",
+  description: process.env.NEXT_PUBLIC_WEBSITE_DESCRIPTION || "Discover exclusive high-quality beauty and hair products at Trurosa ",
 };
 
 export default async function RootLayout({ children }) {
