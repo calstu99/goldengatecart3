@@ -11,7 +11,8 @@ const connect = async () => {
     // using MongoDB Atlas cluster - default dbname is test 
     await mongoose.connect(process.env.MONGO_URI!, {
       // dbName: "trurosa",
-      dbName: process.env.MONGO_DB_NAME,
+      // dbName: process.env.MONGO_DB_NAME,
+      dbName: process.env.MONGO_DB_NAME || "test"
     });
     
     console.log("Mongo Connection successfully established.");

@@ -31,9 +31,9 @@ export const links = [
 ];
 
 export const Hero_links = [
-  {"name":"Women","href":"/specials?collectionHandles=women"},
+  {"name":"Women","href":"/specials?collectionHandles=hair-serum,perfumes"},
   {"name":"Men","href":"/specials?collectionHandles=colognes"},
-  {"name":"Hair Serums","href":"/specials?collectionHandles=hair-serum"}
+  {"name":"Hair Products","href":"/specials?collectionHandles=hair-serum"}
 ];
 
 export const Hero_offers = [

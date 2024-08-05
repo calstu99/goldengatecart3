@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 // need to apply header verfication from Paypal
 // https://developer.paypal.com/api/rest/webhooks/rest/
 import AppleReceiptEmail from '@/emails/goldengate-receipt'; // Import the Server Component
+import {sendSMS} from "@/app/utils/SendSMS";
 
 
 import mongoose from "mongoose";
@@ -167,6 +168,26 @@ const dataToStore =
     }
   };
 
+  // Function to send SMS
+const send_text = async () => {
+  const to = '+14082205118';
+  const body = 'Successful purchase in Paypal';
+
+  try {
+    const data = await sendSMS(to, body);
+    if (data.success) {
+      console.log('SMS sent successfully');
+      return true;
+    } else {
+      console.error(`Failed to send SMS: ${data.error}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(`Error sending SMS: ${error.message}`);
+    return false;
+  }
+};
+
 
 export async function POST(request) {
   try {
@@ -199,6 +220,7 @@ export async function POST(request) {
         // send email
         const totalP = 99.99;  // just placeholder
         await sendEmail(paymentDetailsCheckout);
+        const smsSent = await send_text();
 
         break;
       case 'PAYMENT.CAPTURE.DENIED':

@@ -207,6 +207,11 @@ const columns = [
     Edit Website Content
   </button>
 </Link>
+<Link href="/sms" className="ml-4">
+  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    SMS Message
+  </button>
+</Link>
       
       <MaterialReactTable
         columns={columns}

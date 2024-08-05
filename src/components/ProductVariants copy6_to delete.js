@@ -128,70 +128,44 @@ If no matching tag is found, the rating constant is assigned the default value o
                 <div className="flex-1 px-6">
                   <div>
                     <br />
-                    
-                    {selectedProduct.totalInventory > 0 ? (                
-                      // <div className="flex space-x-4">
-                      <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
+                    {selectedProduct.totalInventory > 0 ? (
+                      <button
+                        onClick={() =>
+                          addToCart({
+                            id: selectedProduct.id,
+                            name: selectedProduct.title,
+                            quantity: parseInt(selectedProduct.totalInventory),
+                            price: parseFloat(
+                              session
+                                ? selectedProduct.priceRange.minVariantPrice.amount * 1.0
+                                : selectedProduct.priceRange.minVariantPrice.amount
+                            ),
+                            imageUrl: selectedProduct.images.edges[0].node.src,
+                          })
+                        }
+                        // className={`bg-blue-500 hover:bg-grey-600 text-white font-medium py-2 px-4 rounded text-xs ${cart.some((item) => item.id === selectedProduct.id)
+                        //   ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                        //   : 'bg-green-500 hover:bg-green-600'
+                        //   }`}
+
+                        className={`bg-blue-500 hover:bg-grey-600 text-white font-medium py-3 px-6 rounded text-base ${cart.some((item) => item.id === selectedProduct.id)
+                          ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
+                          : 'bg-green-500 hover:bg-green-600'
+                          }`}
 
 
-                        <button
-                          onClick={() =>
-                            addToCart({
-                              id: selectedProduct.id,
-                              name: selectedProduct.title,
-                              quantity: parseInt(selectedProduct.totalInventory),
-                              price: parseFloat(
-                                session
-                                  ? selectedProduct.priceRange.minVariantPrice.amount * 1.0
-                                  : selectedProduct.priceRange.minVariantPrice.amount
-                              ),
-                              imageUrl: selectedProduct.images.edges[0].node.src,
-                            })
-                          }
-                       
+                        disabled={cart.some((item) => item.id === selectedProduct.id)}
+                      >
+                        {cart.some((item) => item.id === `${selectedProduct.id}`)
+                          ? 'Added to Cart'
+                          : 'Add to Cart'}
+                      </button>
+                      
 
-                          className={`w-full sm:w-auto bg-blue-500 hover:bg-grey-600 text-white font-medium py-3 px-6 rounded text-base ${cart.some((item) => item.id === selectedProduct.id)
-                            ? 'bg-gray-400 text-gray-600 cursor-not-allowed'
-                            : 'bg-green-500 hover:bg-green-600'
-                            }`}
-
-
-                          disabled={cart.some((item) => item.id === selectedProduct.id)}
-                        >
-                          {cart.some((item) => item.id === `${selectedProduct.id}`)
-                            ? 'Added to Cart'
-                            : 'Add to Cart'}
-                        </button>
-
-                        {/* Buy Now Button */}
-                        <button
-                          onClick={() => {
-                            addToCart({
-                              id: selectedProduct.id,
-                              name: selectedProduct.title,
-                              quantity: 1,
-                              price: parseFloat(
-                                session
-                                  ? selectedProduct.priceRange.minVariantPrice.amount * 1.0
-                                  : selectedProduct.priceRange.minVariantPrice.amount
-                              ),
-                              imageUrl: selectedProduct.images.edges[0].node.src,
-                            });
-                            onCloseVariants();
-                            openCart();
-                          }}
-                          className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded text-base"
-                        >
-                          Buy Now
-                        </button>
-
-                      </div>
 
                     ) : (
                       <p className="text-red-500 font-medium text-lg">Sold Out</p>
                     )}
-
-
 
                     <span className="text-gray-500 text-sm ml-4">
                       {0 < selectedProduct.totalInventory && selectedProduct.totalInventory < 6 ? (
@@ -246,8 +220,7 @@ If no matching tag is found, the rating constant is assigned the default value o
                     <Truck className="w-6 h-6" />
                     <span className="text-sm">2-4 Day Free Shipping</span>
                   </div>
-                  {/* turn off items left - temporarily */}
-                  {/* <span className="text-sm">{selectedProduct.totalInventory > 0 ? `${selectedProduct.totalInventory} items left` : null}</span> */}
+                  <span className="text-sm">{selectedProduct.totalInventory > 0 ? `${selectedProduct.totalInventory} items left` : null}</span>
 
 
                   <div>

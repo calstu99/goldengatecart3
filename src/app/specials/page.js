@@ -251,7 +251,7 @@ const LandingPage = () => {
                 {!session &&
 
                   <div className="relative flex flex-col sm:flex-row sm:space-x-4">
-                    <a
+                    {/* <a
                       href="/login"
                       className="flex items-center w-full px-4 py-2 mb-3 text-sm text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto"
                     >
@@ -263,7 +263,7 @@ const LandingPage = () => {
                       className="flex items-center px-4 py-2 text-sm text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600"
                     >
                       Sign up
-                    </a>
+                    </a> */}
                   </div>
                 }
 

@@ -1,50 +1,31 @@
 "use client";
 import { useState } from 'react';
-import {sendSMS} from '@/app/utils/SendSMS';
 
 export default function SMSForm() {
   const [to, setTo] = useState('');
   const [body, setBody] = useState('');
   const [status, setStatus] = useState('');
 
-  // const sendSMS = async (e) => {
-  //   e.preventDefault();
-  //   setStatus('Sending...');
-  //   const res = await fetch('/api/send-sms', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ to, body }),
-  //   });
-  //   const data = await res.json();
-  //   if (data.success) {
-  //     setStatus('Message sent successfully!');
-  //     setTo('');
-  //     setBody('');
-  //   } else {
-  //     setStatus(`Failed to send message: ${data.error}`);
-  //   }
-  // };
-
-  const handleSubmit = async (e) => {
+  const sendSMS = async (e) => {
     e.preventDefault();
     setStatus('Sending...');
-    try {
-      const data = await sendSMS(to, body);
-      if (data.success) {
-        setStatus('Message sent successfully!');
-        setTo('');
-        setBody('');
-      } else {
-        setStatus(`Failed to send message: ${data.error}`);
-      }
-    } catch (error) {
-      setStatus(`Failed to send message: ${error.message}`);
+    const res = await fetch('/api/send-sms', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to, body }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      setStatus('Message sent successfully!');
+      setTo('');
+      setBody('');
+    } else {
+      setStatus(`Failed to send message: ${data.error}`);
     }
   };
 
   return (
-    // <form onSubmit={sendSMS} className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <form onSubmit={sendSMS} className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
       <div className="mb-4">
         <label htmlFor="to" className="block text-gray-700 text-sm font-bold mb-2">
           Recipient's Phone Number

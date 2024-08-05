@@ -3,6 +3,7 @@
 import mongoose from "mongoose";
 import connect from "@/app/utils/db";
 import MasterOrder from "@/app/models/Master_Order";
+import {sendSMS} from "@/app/utils/SendSMS";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
@@ -126,6 +127,28 @@ await saveDataToDatabase(dataToStore);
 };
 
 
+// Function to send SMS
+const send_text = async () => {
+  const to = '+14082205118';
+  const body = 'Successful purchase in Stripe';
+
+  try {
+    const data = await sendSMS(to, body);
+    if (data.success) {
+      console.log('SMS sent successfully');
+      return true;
+    } else {
+      console.error(`Failed to send SMS: ${data.error}`);
+      return false;
+    }
+  } catch (error) {
+    console.error(`Error sending SMS: ${error.message}`);
+    return false;
+  }
+};
+
+
+
 
 
 export async function POST(req) {
@@ -173,6 +196,8 @@ export async function POST(req) {
       console.log ('paymentDetails Checkout!!!', paymentDetailsCheckout);
       await savePaymentDetailsToDatabase(paymentDetailsCheckout);
       await sendEmail(paymentDetailsCheckout);
+      const smsSent = await send_text();
+
     break;
     // ... handle other event types
     default:
