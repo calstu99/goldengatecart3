@@ -20,6 +20,7 @@ const CartModal = () => {
   const [paymentStatus, setPaymentStatus] = useState('pending');
   const [purchaseUnits, setPurchaseUnits] = useState([]);
   const [paypalButtonKey, setPaypalButtonKey] = useState(0);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   // Coupon Code
   const [couponCode, setCouponCode] = useState('');
@@ -174,6 +175,7 @@ const CartModal = () => {
   // };
 
   const checkout = async () => {
+    setIsCheckingOut(true);
     try {
       const response = await fetch("/api/checkout", {
         method: "POST",
@@ -242,6 +244,9 @@ const CartModal = () => {
         <div>
           {cart.length > 0 ? (
             <>
+            <div>
+            <p className="text-2xl text-gray-700 font-bold border-b-2 border-gray-500">Cart Summary</p>
+            </div>
 
               <div className="mt-4">
                   <div className="flex items-center">
@@ -264,10 +269,16 @@ const CartModal = () => {
                 <div className="flex items-center justify-start space-x-4" >
                 <Button 
                 // className = "bg-[#345f81] hover:bg-[#224d6f] flex items-center"
-                className = "bg-gray-700 hover:bg-grey-400 flex items-center"
+                // className = "bg-gray-700 hover:bg-grey-300 flex items-center"
+                className={`flex items-center ${
+                  isCheckingOut 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-gray-700 hover:bg-gray-600'
+                }`}
                 onClick={checkout}>
                 <CreditCard color="#ffffff" size={25} strokeWidth={0.9} className="mr-2" />
-                 Proceed to checkout
+                 {/* Proceed to checkout */}
+                 {isCheckingOut ? 'Processing...' : 'Proceed to checkout'}
                 </Button>
                 <Image
                     src={cc_image}
@@ -278,7 +289,7 @@ const CartModal = () => {
                   />
                 </div>
                 
-                <br /><br />
+                <br />
                 <PayPalButton
                   key={paypalButtonKey} //  key prop on the PayPalButton component is still used to force a re-render when the cart changes, ensuring that the PayPal Buttons always display the correct total amount.
                   onPaymentSuccess={handlePaymentSuccess}
@@ -316,6 +327,7 @@ const CartModal = () => {
           )}
 
         </div>
+        <br />
         <div>
           <ul>
             {cart.map((product) => (
