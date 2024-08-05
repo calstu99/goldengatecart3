@@ -12,6 +12,8 @@ import {
 } from "./ui/sheet";
 import {Minus,Plus,Trash, ShoppingCart, ShoppingBag, CreditCard} from 'lucide-react';
 import PayPalButton  from './PayPalButton';
+import Image from 'next/image';
+import cc_image from '../../public/images/payment.png';
 
 const CartModal = () => {
   const { cart, incrementQuantity, decrementQuantity, removeFromCart, isCartOpen, closeCart,openCart,clearCart} = useCart();
@@ -23,6 +25,8 @@ const CartModal = () => {
   const [couponCode, setCouponCode] = useState('');
   const [discountAmount, setDiscountAmount] = useState(0);
   const [couponCodeStatus, setCouponCodeStatus] = useState('');
+
+  
 
   const paypalRef = useRef();
   const router = useRouter();
@@ -257,13 +261,21 @@ const CartModal = () => {
               Buy Now
             </button> */}
                 <br /><br />
-                <div>
+                <div className="flex items-center justify-start space-x-4" >
                 <Button 
-                className = "bg-[#345f81] hover:bg-[#224d6f]"
+                // className = "bg-[#345f81] hover:bg-[#224d6f] flex items-center"
+                className = "bg-gray-700 hover:bg-grey-400 flex items-center"
                 onClick={checkout}>
                 <CreditCard color="#ffffff" size={25} strokeWidth={0.9} className="mr-2" />
-                 Credit card
+                 Proceed to checkout
                 </Button>
+                <Image
+                    src={cc_image}
+                    alt="Credit Card Options"
+                    width={140}
+                    height={140}
+                    className="object-contain"
+                  />
                 </div>
                 
                 <br /><br />
