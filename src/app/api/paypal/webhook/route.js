@@ -45,7 +45,8 @@ const extractPaymentDetails = (res) => {
       })); // items  -- convert the items to an array of objects
     const sub_total = Number(res?.resource?.purchase_units[0].amount.value); // total
     const currency = JSON.stringify(res?.resource?.purchase_units[0].amount.currency_code); // currency
-    const status = res?.resource?.status; // status
+    // const status = res?.resource?.status; // status
+    const status = 'paid'; // status
     const transaction_id = res?.resource?.id // transaction id
     const currentTime = currentDateTime.toLocaleTimeString(); // time
     const currentDate = currentDateTime.toLocaleDateString(); // date

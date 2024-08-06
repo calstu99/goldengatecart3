@@ -78,6 +78,22 @@ const AdminOrdersPage = () => {
     }
   };
 
+  // Function to handle copying the order details
+const handleCopyOrderDetails = (order) => {
+  const { name, shippingAddress } = order;
+  const { line1, city, state, postal_code } = shippingAddress;
+
+  const detailsToCopy = `${name}\n${line1}, ${city}, ${state} ${postal_code}`;
+
+  navigator.clipboard.writeText(detailsToCopy)
+    .then(() => {
+      alert('Order details copied to clipboard!');
+    })
+    .catch(err => {
+      console.error('Failed to copy order details: ', err);
+    });
+};
+
 
   const handleViewOrder = (orderId) => {
     router.push(`/admin/order-details/${orderId}`);
@@ -85,10 +101,17 @@ const AdminOrdersPage = () => {
 
 
 const columns = [
-  { accessorKey: "transaction_id", header: "ID" },
-  { accessorKey: "currentDate", header: "Date Created " },
+  { accessorKey: "transaction_id", header: "ID",size: 80, },
+  // { accessorKey: "currentDate", header: "Date Created " },
+  { 
+    accessorKey: "currentDate", 
+    header: "Date Created",
+    // Cell: ({ cell }) => new Date(cell.getValue()).toLocaleString(), // Format the date
+    Cell: ({ cell }) => new Date(cell.getValue()).toLocaleDateString(), // Format the date
+    sortingFn: "datetime" // Use datetime sorting function
+  },
   { accessorKey: "name", header: "Customer Name" },
-  { accessorKey: "email", header: "Email" },
+  { accessorKey: "email", header: "Email"},
   {
     accessorKey: "sub_total",
     header: "Total Amount",
@@ -132,6 +155,7 @@ const columns = [
           className="border rounded text-xs px-2 py-1 mr-2"
         >
           {/* <option value="pending">Pending</option> */}
+          <option value="paid">Paid</option>
           <option value="processing">Processing</option>
           <option value="shipped">Shipped</option>
           <option value="delivered">Delivered</option>
@@ -149,6 +173,12 @@ const columns = [
           className="mt-1 ml-4 bg-blue-500 text-white px-2 py-1 rounded text-xs"
         >
           View
+        </button>
+        <button
+          onClick={() => handleCopyOrderDetails(row.original)}
+          className="mt-1 ml-4 bg-green-500 text-white px-2 py-1 rounded text-xs"
+        >
+          Copy Details
         </button>
       </>
     ),
@@ -212,6 +242,11 @@ const columns = [
     SMS Message
   </button>
 </Link>
+<Link href="/admin/products/all_products" className="ml-4">
+  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+   Products
+  </button>
+</Link>
       
       <MaterialReactTable
         columns={columns}
@@ -223,6 +258,18 @@ const columns = [
         // adding for excel extraction
         renderRowOutsideOverlay
         renderRowOutsideOverlayStart={<tr ref={tableRef} />}
+        initialState={{
+          columnVisibility: {
+            transaction_id: false, // This will hide the transaction_id column by default
+            email: false, // This will hide the email column by default
+          },
+          sorting: [
+            {
+              id: 'currentDate', // Sort by the currentDate field
+              desc: true,        // Sort in descending order (newest first)
+            },
+          ],
+        }}
 
       />
     </div>

@@ -36,7 +36,7 @@ export default async function RootLayout({ children }) {
         <FacebookPixel/>
         {children}
         <Footer/>
-        <CartSummary /> {/* Add this line */}
+        {/* <CartSummary />  */}
         </CartProvider>
         </SessionProvider>
       </body>

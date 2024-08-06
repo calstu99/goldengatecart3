@@ -22,6 +22,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@react-email/components": "0.0.19",
     "@shopify/storefront-api-client": "^0.3.3",
+    "@use-gesture/react": "^10.3.1",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

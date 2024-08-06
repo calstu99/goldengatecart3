@@ -24,7 +24,7 @@ export const SpecialPagePics = {
 
 export const links = [
   {"name":"Home","href":"/"},
-  {"name":"Women","href":"/specials?collectionHandles=hair-serum,perfumes"},
+  {"name":"Women","href":"/specials?collectionHandles=hair-serum,perfumes,skin-product"},
   {"name":"Men","href":"/specials?collectionHandles=colognes"},
   {"name":"Hair Products","href":"/specials?collectionHandles=hair-serum"},
   {"name":"Sale","href":"/specials?collectionHandles=trurosa_specials"}

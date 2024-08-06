@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
-import Zoom from 'react-medium-image-zoom';
-
+import Zoom from 'react-medium-image-zoom'
 
 export default function ImageGallery({ images }) {
   const [bigImage, setBigImage] = React.useState(images[0]);
