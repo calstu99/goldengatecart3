@@ -27,18 +27,20 @@ export const links = [
   {"name":"Women","href":"/specials?collectionHandles=hair-serum,perfumes,skin-product"},
   {"name":"Men","href":"/specials?collectionHandles=colognes"},
   {"name":"Hair Products","href":"/specials?collectionHandles=hair-serum"},
+  {"name":"Skin Products","href":"/specials?collectionHandles=skin-product"},
   {"name":"Sale","href":"/specials?collectionHandles=trurosa_specials"}
 ];
 
 export const Hero_links = [
   {"name":"Women","href":"/specials?collectionHandles=hair-serum,perfumes"},
   {"name":"Men","href":"/specials?collectionHandles=colognes"},
-  {"name":"Hair Products","href":"/specials?collectionHandles=hair-serum"}
+  {"name":"Hair Products","href":"/specials?collectionHandles=hair-serum"},
+  {"name":"Skin Products","href":"/specials?collectionHandles=skin-product"}
 ];
 
 export const Hero_offers = [
   {"name":"Sale","href":"/specials?collectionHandles=trurosa_specials"},
-  {"name":"Limited Offer!","href":"/specials?collectionHandles=hair-serum-001"}
+  {"name":"Limited Offer!","href":"/specials?collectionHandles=skin-product-001,skin-product-002,hair-care-001, hair-care-002"}
 ];
 
 export const link_headline = [
