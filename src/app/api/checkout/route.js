@@ -6,7 +6,7 @@ const getActiveProducts = async () => {
   const availableProducts = checkProducts.data.filter(
     (product) => product.active === true
   );
-  console.log(availableProducts);
+  // console.log(availableProducts);
   return availableProducts;
 };
 
