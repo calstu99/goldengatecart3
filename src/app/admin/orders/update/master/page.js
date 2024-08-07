@@ -262,6 +262,7 @@ const columns = [
           columnVisibility: {
             transaction_id: false, // This will hide the transaction_id column by default
             email: false, // This will hide the email column by default
+            ['paymentMethod.platform']: false // Use bracket notation In JavaScript object literals, you can't use dot notation for property names. Instead, you need to use bracket notation or quotes around the entire property name.
           },
           sorting: [
             {
@@ -269,6 +270,7 @@ const columns = [
               desc: true,        // Sort in descending order (newest first)
             },
           ],
+          density: 'compact', // Set the default density to 'compact'
         }}
 
       />
