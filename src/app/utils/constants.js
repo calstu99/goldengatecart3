@@ -59,6 +59,8 @@ export const link_descriptions = [
   {"key":"hair-serum","value":"Our best selling hair serum! Nourishing Hair Serum for Hair Growth, Scalp Hydration & Hair Shine for Men and Women - with Rosemary scent and Castor seed oil. [Trurosa].\n\n Promotes Thicker, Fuller, Healthier Looking Hair." },
   {"key":"trurosa_specials","value":"Check out our full range of new selections - Summer Specials!!! All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Summer Fashion Line."},
   {"key":"hair-serum-001","value":"Check out our full range of new selections - Summer Specials!!! All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Summer Fashion Line."},
-  {"key":"skin-product-001","value":"Indulge in the ultimate skincare experience with our luxurious range of skin and beauty products, designed to enhance your natural beauty and promote radiant, healthy skin. Each product in our collection is meticulously formulated with the finest ingredients, combining the power of nature and advanced science to deliver visible, long-lasting results."}
+  {"key":"skin-product-001","value":"Indulge in the ultimate skincare experience with our luxurious range of skin and beauty products, designed to enhance your natural beauty and promote radiant, healthy skin. Each product in our collection is meticulously formulated with the finest ingredients, combining the power of nature and advanced science to deliver visible, long-lasting results."},
+  {"key":"skin-product-002","value":"Indulge in the ultimate skincare experience with our luxurious range of skin and beauty products, designed to enhance your natural beauty and promote radiant, healthy skin. Each product in our collection is meticulously formulated with the finest ingredients, combining the power of nature and advanced science to deliver visible, long-lasting results."}
+
 ];
 
