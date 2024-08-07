@@ -1,11 +1,11 @@
 export const HeroText = {
   "MainText": "The Best in high quality beauty and hair products",
-  "MainDescription": "We sell only the most exclusive and high quality products for you. We are the best so come and shop with us. Don't miss out on our coming Summer Deals."
+  "MainDescription": "Discover Exclusive, High-Quality Products Just for You! Shop with the Best and Take Advantage of Our Upcoming Fall Deals!"
 };
 
 export const landingPageText = {
   "MainText": "The Best in high quality beauty products",
-  "holidayText": "Fourth of July Sale Coming soon. Order now!"
+  "holidayText": "Fall Sale Coming soon. Order now!"
 };
 
 export const HeroPagePics = {
@@ -53,19 +53,21 @@ export const link_headline = [
   {"key":"women","value":"Elevate Your Style with High-Quality Ladie's Elite Fashion"},
   {"key":"bestsellers","value":"Best Sellers - Get while it last!"},
   {"key":"hair-serum","value":"Best Sellers in Hair Products!"},
-  {"key":"hair-serum-001","value":"Our latest Hair Serum - now on Sale the Summer!"},
+  {"key":"skin-product","value":"Best Sellers in Skin Products!"},
+  {"key":"hair-serum-001","value":"Our latest Hair Serum - now on Sale!"},
   {"key":"default","value":"Quality and Style for Every Occasion"}
 ];
 
 export const link_descriptions = [
   {"key":"colognes","value":"Discover the power of scent and elevate your presence with our curated collection of men's colognes. From classic, timeless fragrances to bold, contemporary blends, we offer an olfactory journey that speaks to every man's unique style and personality."},
-  {"key":"women","value":"Check out our full range of new selections including ponchos in a wide selection of colors and sizes. All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Summer Fashion Line."},
+  {"key":"women","value":"Check out our full range of new selections including ponchos in a wide selection of colors and sizes. All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Fall Beauty Line."},
   {"key":"knives","value":"Whether from afar or examining it up close, the artisanal devotion shines through in every meticulous crafted knives. We offer multiple brands including: SOG, Civivi, Kershaw, CRKT & CRJB. "},
-  {"key":"bestsellers","value":"Don't miss out on our coming Summer Fashion Line. "},
+  {"key":"bestsellers","value":"Don't miss out on our coming Fall Beauty Line. "},
   {"key":"default","value":"Select from our best products."},
-  {"key":"hair-serum","value":"Our best selling hair serum! Nourishing Hair Serum for Hair Growth, Scalp Hydration & Hair Shine for Men and Women - with Rosemary scent and Castor seed oil. [Trurosa].\n\n Promotes Thicker, Fuller, Healthier Looking Hair." },
-  {"key":"trurosa_specials","value":"Check out our full range of new selections - Summer Specials!!! All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Summer Fashion Line."},
-  {"key":"hair-serum-001","value":"Check out our full range of new selections - Summer Specials!!! All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Summer Fashion Line."},
+  {"key":"hair-serum","value":"Elevate your hair care routine with our exclusive range of premium hair products, designed to nourish, protect, and enhance your natural beauty. Whether you're looking to revitalize damaged strands, add shine, or achieve your desired style, our high-quality formulations cater to every hair type and need. Discover the secret to healthy, gorgeous hair and enjoy the confidence that comes with it—shop now and transform your locks today!" },
+  {"key":"trurosa_specials","value":"Check out our full range of new selections - Fall Specials!!! All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Fall Beauty Line."},
+  {"key":"hair-serum-001","value":"Check out our full range of new selections - Fall Specials!!! All made with 100% recycled fabrics. Get the best and latest brands for the best prices. Don't miss out on our coming Fall Beauty Line."},
+  {"key":"skin-product","value":"Indulge in the ultimate skincare experience with our luxurious range of skin and beauty products, designed to enhance your natural beauty and promote radiant, healthy skin. Each product in our collection is meticulously formulated with the finest ingredients, combining the power of nature and advanced science to deliver visible, long-lasting results."},
   {"key":"skin-product-001","value":"Indulge in the ultimate skincare experience with our luxurious range of skin and beauty products, designed to enhance your natural beauty and promote radiant, healthy skin. Each product in our collection is meticulously formulated with the finest ingredients, combining the power of nature and advanced science to deliver visible, long-lasting results."},
   {"key":"skin-product-002","value":"Indulge in the ultimate skincare experience with our luxurious range of skin and beauty products, designed to enhance your natural beauty and promote radiant, healthy skin. Each product in our collection is meticulously formulated with the finest ingredients, combining the power of nature and advanced science to deliver visible, long-lasting results."}
 
