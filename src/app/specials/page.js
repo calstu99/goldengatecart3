@@ -126,7 +126,7 @@ const LandingPage = () => {
 
           setDescription(paragraphs);
         } else {
-          setDescription(['Select from our best products']);
+          setDescription(['Unlock your beauty potential with our premium range of hair and beauty products, meticulously crafted to enhance your natural radiance and promote healthy hair. Each product in our collection is formulated with high-quality ingredients, combining the best of nature and science to deliver exceptional results.']);
         }
 
 
