@@ -16,9 +16,10 @@ export const HeroPagePics = {
 };
 
 export const SpecialPagePics = {
-  "SpecialPic1": "https://m.media-amazon.com/images/I/31-AgWo6jrL._SX522_.jpg",
+  // "SpecialPic1": "https://m.media-amazon.com/images/I/31-AgWo6jrL._SX522_.jpg",
+  "SpecialPic1": "https://images.pexels.com/photos/2464535/pexels-photo-2464535.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=200&w=200",
   // "SpecialPic2": "https://m.media-amazon.com/images/I/81AVBrYD3uL._SL1500_.jpg",
-  "SpecialPic2": "https://images.pexels.com/photos/2464535/pexels-photo-2464535.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=400&w=1200",
+  "SpecialPic2": "https://i.postimg.cc/7ZhsrfSw/Screenshot-2024-08-07-at-12-47-51-AM.png",
   // "SpecialPic3": "https://m.media-amazon.com/images/I/51-amRfTCSL._SX679_.jpg",
   "SpecialPic3": "https://images.pexels.com/photos/1778821/pexels-photo-1778821.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=200&w=200"
 

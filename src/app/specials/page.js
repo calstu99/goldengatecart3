@@ -329,7 +329,7 @@ const LandingPage = () => {
       </Zoom>
     </div>
 
-    <div className="relative right-14 top-20 z-30 -ml-2 overflow-hidden rounded-lg w-1/5 h-3/4"> {/* Second image */}
+    <div className="relative right-14 top-20 z-30 -ml-2 overflow-hidden rounded-lg w-5/5 h-full"> {/* Second image */}
       <Zoom>
         <img
           src={SpecialPagePics.SpecialPic2}
