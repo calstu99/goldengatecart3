@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link';
 // import logo from '../components/logo.svg';
-import logo from '../../public/images/logo.png';
+import logo from '../../public/images/logo_new_pink.png';
 import Image from 'next/image';
 import { Dancing_Script } from 'next/font/google';
 
@@ -13,7 +13,7 @@ const Footer = () => {
   <div className="mx-auto w-full max-w-screen-xl p-2 py-4 lg:py-6">
     <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="/" className="flex items-center">
+            {/* <a href="/" className="flex items-center">
               <Image
                 src={logo}
                 alt="Logo"
@@ -23,7 +23,18 @@ const Footer = () => {
               <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>Tru
                 <span className="text-nav-text-800">rosa</span>
               </h1>
-            </a>
+            </a> */}
+
+          <Link href="/">
+            <Image
+              src={logo}
+              alt="Logo"
+              width={140}
+              height={140}
+              className='ml-4'
+            
+            />
+            </Link>
           </div>
       
       <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

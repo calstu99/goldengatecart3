@@ -10,7 +10,7 @@ import { Dancing_Script } from 'next/font/google';
 import requireAuth from "@/app/utils/requireAuth";
 import { signOut, useSession } from "next-auth/react";
 import Image from 'next/image';
-import logo from '../../public/images/logo.png';
+import logo from '../../public/images/logo_new_pink.png';
 import { Button } from './ui/button';
 import {ShoppingBag, ShoppingCart, Menu, Minimize2, User} from 'lucide-react';
 import {
@@ -94,21 +94,23 @@ const Nav = () => {
       <header className={`${isSticky ? 'sticky' : ''} mb-8 border-b`}>
         <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
           <Link href="/">
-          <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>Tru
+          {/* <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>Tru
           <span className="text-nav-text-800">rosa</span>
-          </h1>
+          </h1> */}
           {/* <h1 className="text-lg md:text-xl font-bold">
               True<span className="text-primary">Rosa</span>
             </h1> */}
           </Link>
+          <Link href="/">
           <Image
             src={logo}
             alt="Logo"
-            width={75}
-            height={75}
+            width={140}
+            height={140}
             className='ml-4'
-      
+          
           />
+          </Link>
           
           <nav className="hidden gap-12 lg:flex 2xl:ml-16 px-8">
             {links.map((link, idx) => (

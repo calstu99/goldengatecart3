@@ -220,8 +220,13 @@ const LandingPage = () => {
   return (
 
     <>
-
+    <div>
+   
       <section className="px-2 py-2 bg-white md:px-0">
+      <div className="bg-cover bg-center h-128"
+      style={{ backgroundImage: "url('https://images.pexels.com/photos/8015872/pexels-photo-8015872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=200&w=200')" }}>
+
+        
         <div className="container items-center max-w-6xl px-8 mx-auto xl:px-5">
           <div className="flex flex-wrap items-center sm:-mx-3">
 
@@ -354,6 +359,8 @@ const LandingPage = () => {
 
           </div>
         </div>
+
+        </div>
       </section>
 
 
@@ -417,6 +424,8 @@ const LandingPage = () => {
 
         </div>
       </div>
+
+    </div>
     </>
    
   );
