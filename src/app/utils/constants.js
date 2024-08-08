@@ -29,18 +29,19 @@ export const SpecialPagePics = {
 
 export const links = [
   {"name":"Home","href":"/"},
-  {"name":"Women","href":"/specials?collectionHandles=hair-serum,perfumes,skin-product"},
-  {"name":"Men","href":"/specials?collectionHandles=colognes"},
-  {"name":"Hair Products","href":"/specials?collectionHandles=hair-serum"},
-  {"name":"Skin Products","href":"/specials?collectionHandles=skin-product"},
-  {"name":"Sale","href":"/specials?collectionHandles=trurosa_specials"}
+  {"name":"Shop Women","href":"/specials?collectionHandles=hair-serum,perfumes,skin-product"},
+  {"name":"Shop Men","href":"/specials?collectionHandles=colognes"},
+  {"name":"Hair Care","href":"/specials?collectionHandles=hair-serum"},
+  {"name":"Skin Care","href":"/specials?collectionHandles=skin-product"},
+  // {"name":"Sale","href":"/specials?collectionHandles=trurosa_specials"}
 ];
 
 export const Hero_links = [
   {"name":"Women","href":"/specials?collectionHandles=hair-serum,perfumes"},
   {"name":"Men","href":"/specials?collectionHandles=colognes"},
   {"name":"Hair","href":"/specials?collectionHandles=hair-serum"},
-  {"name":"Skin","href":"/specials?collectionHandles=skin-product"}
+  {"name":"Skin","href":"/specials?collectionHandles=skin-product"},
+  {"name":"Fragrances","href":"/specials?collectionHandles=colognes,perfumes"}
 ];
 
 export const Hero_offers = [
