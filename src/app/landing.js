@@ -152,8 +152,8 @@ const LandingPage = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const collectionHandlesFromURL = urlParams.get('collectionHandles');
 
-        console.log('urlParams',urlParams);
-        console.log('collectionHandles',collectionHandlesFromURL);
+       // console.log('urlParams',urlParams);
+       // console.log('collectionHandles',collectionHandlesFromURL);
         
         // If collectionHandles is provided in the URL, use it instead of the environment variable
         // const collectionHandlesToFetch = collectionHandlesFromURL
@@ -194,7 +194,7 @@ const LandingPage = () => {
         }
 
         setProducts(allProducts);
-        console.log('allProducts', allProducts);
+        // console.log('allProducts', allProducts);
 
 
    
@@ -252,7 +252,7 @@ const LandingPage = () => {
         {/* <h2 className="text-3xl font-extrabold text-gray-900 mb-8">Featured Products</h2> */}
         
         {/* <h1 className="text-2xl font-bold text-gray-900 ">Our Best Sellers</h1> */}
-        <h1>{console.log('bestseller',bestSellerProducts)}</h1>
+        {/* <h1>{console.log('bestseller',bestSellerProducts)}</h1> */}
         {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {
             bestSellerProducts.map((product) => (

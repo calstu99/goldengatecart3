@@ -62,9 +62,9 @@ const CartModal = () => {
   
   const applyCouponCode = () => {
     const discountCode = process.env.NEXT_PUBLIC_DISCOUNT_CODE;
-    console.log('discount code',discountCode);
+    //console.log('discount code',discountCode);
     const discountAmount = parseFloat(process.env.NEXT_PUBLIC_DISCOUNT_AMOUNT);
-    console.log("couponcode entered",couponCode);
+    //console.log("couponcode entered",couponCode);
     if (couponCode.toUpperCase() === discountCode) {
       const discount = totalAmount * discountAmount; // 10% discount
       setDiscountAmount(discount);
@@ -108,7 +108,7 @@ const CartModal = () => {
   
   const handlePaymentSuccess = () => {
     // Reset the cart state
-    console.log('clear Cart');
+    //console.log('clear Cart');
     setPaymentStatus('success');
     // console.log("payment status", paymentStatus);
     clearCart();
@@ -228,7 +228,7 @@ const CartModal = () => {
     }
   }, [isCartOpen]);
 
-  console.log('cart',cart);
+  //console.log('cart',cart);
 
   return (
     <Sheet open={isCartOpen} onOpenChange={closeCart}>

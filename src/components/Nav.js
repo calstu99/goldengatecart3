@@ -92,7 +92,7 @@ const Nav = () => {
     <Sheet >
       {/* <header className="mb-8 border-b"> */}
       <header className={`${isSticky ? 'sticky' : ''} mb-8 border-b`}>
-        <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl">
+        <div className="flex items-center justify-between mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl ">
           <Link href="/">
           {/* <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>Tru
           <span className="text-nav-text-800">rosa</span>
@@ -105,8 +105,9 @@ const Nav = () => {
           <Image
             src={logo}
             alt="Logo"
-            width={140}
-            height={140}
+            width={120} // Specify the width
+            height={120} // Specify the height
+            style={{width: '100%', height: 'auto', objectFit: 'cover' }} // Apply object-fit style // Maintains aspect ratio
             className='ml-4'
           
           />
@@ -237,19 +238,20 @@ const Nav = () => {
                   src={logo}
                   alt="star logo mobile"
                 /> */}
-                <div className="flex items-center justify-center mt-10">
+                <div className="flex items-center justify-center mt-10 w-20 h-20">
                   {/* <p className="text-xl md:text-2xl font-bold mr-2">
                     Golden Gate<span className="text-primary">Cart</span>
                   </p> */}
-                  <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>True
+                  {/* <h1 className={`${dancingScript.className} text-2xl md:text-3xl lg:text-4xl`}>True
                     <span className="text-primary">Rosa</span>
-                  </h1>
+                  </h1> */}
                   <Image
                     src={logo}
                     alt="Logo"
-                    width={40}
-                    height={40}
-                    className="ml-2"
+                    width={80} // Specify the width
+                    height={80} // Specify the height
+                    style={{ width: '100%', height: 'auto',objectFit: 'cover' }} // Apply object-fit style // Maintains aspect ratio
+                    className="ml-2" // Ensure aspect ratio is maintained
                   />
                 </div>
              
@@ -262,7 +264,7 @@ const Nav = () => {
                       <div className="flex-shrink-0">
                         {session ? (
                           <span className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
-                            {session.user?.email}
+                            {/* {session.user?.email} */}
                           </span>
                         ) : (
                           <>

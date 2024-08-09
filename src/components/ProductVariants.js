@@ -25,7 +25,7 @@ const ProductVariants = ({ selectedProduct, addToCart, onCloseVariants }) => {
   const { cart, openCart } = useCart();
   const [showFullDescription, setShowFullDescription] = useState(false);
   const { data: session } = useSession();
-  console.log('session user', session?.user?.email);
+ // console.log('session user', session?.user?.email);
 
 
   /* 
@@ -71,7 +71,7 @@ If no matching tag is found, the rating constant is assigned the default value o
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         onCloseVariants();
-        console.log('clicked outside modal');
+        //console.log('clicked outside modal');
       }
     };
 

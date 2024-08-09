@@ -77,7 +77,7 @@ const LandingPage = () => {
         const collectionHandlesFromURL = searchParams.getAll('collectionHandles');
 
         // console.log('urlParams',urlParams);
-        console.log('collectionHandles', collectionHandlesFromURL);
+        // console.log('collectionHandles', collectionHandlesFromURL);
 
         
 
@@ -163,7 +163,7 @@ const LandingPage = () => {
         }
 
         setProducts(allProducts);
-        console.log('allProducts', allProducts);
+        // console.log('allProducts', allProducts);
 
         // added for Url parameter --> &select=yes  -- http://localhost:3000/specials?collectionHandles=hair-serum-001&select=yes
         const urlParams = new URLSearchParams(window.location.search)

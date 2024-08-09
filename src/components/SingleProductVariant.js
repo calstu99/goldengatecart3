@@ -21,7 +21,7 @@ const ProductVariants = ({ selectedProduct, onCloseVariants }) => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
         onCloseVariants();
-        console.log('clicked outside modal');
+        //console.log('clicked outside modal');
       }
     };
 

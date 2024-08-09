@@ -13,7 +13,7 @@ const connect = async () => {
       // dbName: "trurosa",
       // dbName: process.env.MONGO_DB_NAME,
       dbName: process.env.MONGO_DB_NAME || "test"
-    });
+   });
     
     console.log("Mongo Connection successfully established.");
   } catch (error) {
