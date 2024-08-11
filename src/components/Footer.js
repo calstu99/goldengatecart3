@@ -29,8 +29,9 @@ const Footer = () => {
             <Image
               src={logo}
               alt="Logo"
-              width={120}
-              height={120}
+              layout="responsive" // Use responsive layout
+              width={20}
+              height={20}
               style={{ width: '100%', height: 'auto',objectFit: 'cover' }} // Apply object-fit style // Maintains aspect ratio
               className='ml-4'
             

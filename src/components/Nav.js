@@ -105,8 +105,8 @@ const Nav = () => {
           <Image
             src={logo}
             alt="Logo"
-            width={120} // Specify the width
-            height={120} // Specify the height
+            width={100} // Specify the width
+            height={100} // Specify the height
             style={{width: '100%', height: 'auto', objectFit: 'cover' }} // Apply object-fit style // Maintains aspect ratio
             className='ml-4'
           
